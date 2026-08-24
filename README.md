@@ -13,6 +13,9 @@ xuất **báo cáo HTML** kèm ảnh và thống kê. App có **hai chế độ*
 
 Hai chế độ dùng chung định dạng dữ liệu và chung mẫu báo cáo, nên có thể dùng cả hai.
 
+> 🖥️ **Đưa app sang máy khác?** Xem [HUONG_DAN_CAI_DAT.md](HUONG_DAN_CAI_DAT.md)
+> — hoặc chỉ cần bấm đúp **`CAI_DAT.cmd`** rồi làm theo hướng dẫn trên màn hình.
+
 ## Chạy app
 
 | Việc cần làm | Cách chạy |
@@ -21,6 +24,7 @@ Hai chế độ dùng chung định dạng dữ liệu và chung mẫu báo cáo
 | **Đọc sự kiện phương tiện của camera** (chế độ A) | Bấm đúp **`DOC_SU_KIEN_CAMERA.bat`** |
 | Tự giám sát chạy nền (chế độ B) | Bấm đúp **`CHAY_NEN.bat`** (Ctrl+C để dừng) |
 | Chọn lại vùng chụp | Bấm đúp **`CHON_VUNG_CHUP.bat`** |
+| Cài đặt trên máy mới | Bấm đúp **`CAI_DAT.cmd`** |
 
 Hoặc dùng dòng lệnh:
 
@@ -188,6 +192,12 @@ hoặc tăng `input_size` lên 416.
 
 ```bat
 python -m pip install "opencv-python==4.10.0.84" numpy mss pywin32 pillow winsdk
+```
+
+Hoặc để `CAI_DAT.cmd` lo hết. Kiểm tra môi trường bất cứ lúc nào:
+
+```bat
+python -m app.cai_dat --kiem-tra
 ```
 
 Mô hình nhận dạng: **YOLOv4-tiny** (COCO) trong thư mục `models/` — chạy trên CPU,
