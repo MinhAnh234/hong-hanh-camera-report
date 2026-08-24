@@ -7,6 +7,8 @@ Hai che do chup:
   - "manhinh": chup vung man hinh (mss) - can cua so Imou hien ro tren cung.
 """
 import ctypes
+import os
+import subprocess
 import time
 from ctypes import wintypes
 
@@ -157,6 +159,85 @@ def restore_windows(title_part):
     return len(hits)
 
 
+def dang_chay(ten_exe="Imou_en.exe"):
+    """App da chay chua (du cua so co the dang an)."""
+    try:
+        out = subprocess.check_output(
+            ["tasklist", "/FI", "IMAGENAME eq " + ten_exe],
+            stderr=subprocess.DEVNULL, creationflags=0x08000000).decode("utf-8", "ignore")
+        return ten_exe.lower() in out.lower()
+    except Exception:
+        return False
+
+
+def mo_app_imou(cfg, log=None):
+    """Mo app Imou neu chua co cua so nao. Tra ve True neu cuoi cung da co cua so.
+
+    Dung cho lich chay tu dong: neu ai do da tat app Imou thi tu bat lai.
+    """
+    title = cfg.get("window_title", "Imou")
+    noi = log or (lambda *_a: None)
+
+    if list_windows(title):
+        return True
+    if restore_windows(title):
+        time.sleep(1.5)
+        if list_windows(title):
+            return True
+
+    exe = cfg.get("duong_dan_imou", "")
+    if not cfg.get("tu_mo_imou", True):
+        return False
+    if not exe or not os.path.exists(exe):
+        noi(u"Không thấy file chạy của Imou: %s" % exe)
+        return False
+
+    noi(u"App Imou chưa chạy – đang tự mở…")
+    try:
+        subprocess.Popen([exe], cwd=os.path.dirname(exe),
+                         creationflags=0x00000008)          # DETACHED_PROCESS
+    except Exception as e:
+        noi(u"Không mở được app Imou: %s" % e)
+        return False
+
+    return cho_imou_san_sang(cfg, noi)
+
+
+def giao_dien_da_len(img):
+    """Cua so hien ra co phai GIAO DIEN CHINH khong (khong phai man hinh chao).
+
+    Kiem tra bang cach doc chu o goc tren trai: giao dien chinh luon co hai the
+    "Trang chu" va "Xem Lai".
+    """
+    if img is None or img.shape[1] < 900 or img.shape[0] < 600:
+        return False
+    try:
+        from . import ocr
+        lines = ocr.read(img[0:95, 0:420], scale=2.0)
+        return (ocr.find_line(lines, u"trang", u"chu") is not None
+                or ocr.find_line(lines, u"xem", u"lai") is not None)
+    except Exception:
+        return float(img.std()) >= 15.0        # khong doc duoc chu thi doan theo anh
+
+
+def cho_imou_san_sang(cfg, noi=None):
+    """Cho den khi giao dien chinh cua Imou hien ra."""
+    noi = noi or (lambda *_a: None)
+    title = cfg.get("window_title", "Imou")
+    tong = float(cfg.get("cho_imou_giay", 90))
+    bat_dau = time.time()
+    while time.time() - bat_dau < tong:
+        restore_windows(title)
+        for hwnd in list_windows(title):
+            if giao_dien_da_len(print_window(hwnd)):
+                noi(u"App Imou đã sẵn sàng sau %d giây." % int(time.time() - bat_dau))
+                time.sleep(2.0)                # cho giao dien on dinh han
+                return True
+        time.sleep(2.5)
+    noi(u"Chờ quá %d giây mà giao diện Imou chưa hiện ra." % int(tong))
+    return False
+
+
 def find_window(title_part):
     wins = list_windows(title_part)
     return wins[0] if wins else None
@@ -220,6 +301,9 @@ class WindowCapture(object):
         wins = list_windows(self.cfg["window_title"])
         if not wins and restore_windows(self.cfg["window_title"]):
             time.sleep(1.2)                      # cho cua so hien lai
+            wins = list_windows(self.cfg["window_title"])
+        if not wins and self.cfg.get("tu_mo_imou", True):
+            mo_app_imou(self.cfg, log=print)     # app bi tat -> tu mo lai
             wins = list_windows(self.cfg["window_title"])
         if not wins:
             self.hwnd, self.mode = None, None

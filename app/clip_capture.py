@@ -211,7 +211,32 @@ def _giay(hms):
     return h * 3600 + m * 60 + s
 
 
-def chup_anh_net(cfg, events, log=print, lech_toi_da=240):
+def chon_tab_ban_ghi(ui, log=None):
+    """Bam vao tab 'Ban ghi noi bo' (app vua mo thuong dang o 'Ban ghi dam may')."""
+    noi = log or (lambda *_a: None)
+    img = ui.shot()
+    lines = ocr.read(img[160:235, 265:950], scale=2.2)
+    hit = ocr.find_line(lines, u"noi", u"bo")
+    if hit is None:
+        noi(u"  (!) Không thấy tab 'Bản ghi nội bộ' – dùng tab đang mở.")
+        return False
+    cx, cy = hit.center
+    ui.click(cx + 265, cy + 160, settle=2.5)
+    return True
+
+
+def cho_the_clip(ui, timeout=20.0):
+    """Cho danh sach clip hien ra sau khi doi tab / doi ngay."""
+    het = time.time() + timeout
+    while time.time() < het:
+        img = ui.shot()
+        if [c for c in find_clip_cards(img) if read_clip_time(img, c)]:
+            return True
+        time.sleep(1.5)
+    return False
+
+
+def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
     """Voi moi su kien, mo clip gan nhat va chup mot khung hinh net.
 
     events: [{'thoi_gian': 'YYYY-MM-DD HH:MM:SS', ...}] - se duoc them khoa 'anh_net'.
@@ -242,9 +267,19 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=240):
     if not ui.select_device(cfg.get("camera_name", "")):
         raise RuntimeError(u"Không tìm thấy camera trong danh sách.")
 
+    log(u"• Chọn tab Bản ghi nội bộ…")
+    chon_tab_ban_ghi(ui, log)
+
     log(u"• Chọn ngày %s…" % ngay.strftime("%d-%m-%Y"))
-    ui.select_day(ngay.day)
+    if not ui.select_day(ngay.day):
+        ui.tra_lai()
+        raise RuntimeError(
+            u"Không chọn được ngày %d ở tab Xem Lại (đang mở ngày %s). "
+            u"Bỏ qua bước chụp ảnh nét để tránh lấy clip của ngày khác."
+            % (ngay.day, ui.ngay_dang_chon()))
     time.sleep(1.5)
+    if not cho_the_clip(ui):
+        log(u"  (!) Danh sách clip chưa hiện ra sau 20 giây.")
 
     con_lai = sorted(events, key=lambda e: e["thoi_gian"], reverse=True)   # moi -> cu
     xong = 0
@@ -260,9 +295,15 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=240):
         for _vong in range(60):
             if not con_lai:
                 break
-            img = ui.shot()
-            the = [(c, read_clip_time(img, c)) for c in find_clip_cards(img)]
-            the = [(c, t) for c, t in the if t]
+            # anh thumbnail tai kieu "cuon toi dau tai toi do" -> cho no hien ra
+            the = []
+            for cho in range(4):
+                img = ui.shot()
+                the = [(c, read_clip_time(img, c)) for c in find_clip_cards(img)]
+                the = [(c, t) for c, t in the if t]
+                if the:
+                    break
+                time.sleep(1.8)
 
             lam_gi = None
             for ev in list(con_lai):
@@ -282,7 +323,9 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=240):
 
             ev, (card, lech, gio_clip) = lam_gi
             xa, ya, xb, yb = card
-            log(u"  → %s  ← clip %s (lệch %ds)" % (ev["thoi_gian"][11:], gio_clip, lech))
+            log(u"  → %s  ← clip %s (lệch %ds)%s"
+                % (ev["thoi_gian"][11:], gio_clip, lech,
+                   u"  ⚠ lệch nhiều, có thể không đúng lượt" if lech > 60 else u""))
             ui.click((xa + xb) // 2, (ya + yb) // 2, double=True, settle=2.0)
 
             h = _cho_player()

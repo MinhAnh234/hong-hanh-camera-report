@@ -127,7 +127,7 @@ class ImouUI(object):
         for _ in range(abs(notches)):
             user32.mouse_event(0x0800, 0, 0, ctypes.c_int(-120 if notches > 0 else 120), 0)
             time.sleep(0.1)
-        time.sleep(1.4)
+        time.sleep(2.2)          # cho danh sach tai xong anh sau khi cuon
 
     # ---------- dieu huong ----------
     def open_message_center(self):
@@ -199,23 +199,87 @@ class ImouUI(object):
         self.click(ox + 265, oy + 210, settle=2.2)
         return True
 
-    def day_tabs(self):
-        """Cac the ngay tren dau trang -> [(so_ngay, x, y)]."""
-        img = self.shot()
-        band = img[95:165, 400:]
+    DAY_BAND = (85, 132, 380)          # (y1, y2, x1) dai chua so ngay
+
+    def day_tabs(self, img=None):
+        """Cac the ngay tren dau trang -> [(so_ngay, x, y, dang_chon)].
+
+        Luu y: canh so ngay con co mot cham tron mau cam (bao "ngay nay co du
+        lieu"), OCR hay doc thanh ky tu la -> phai loc lay rieng phan chu so.
+        Va the DANG CHON thi chinh CHU SO duoc to mau cam.
+        """
+        img = self.shot() if img is None else img
+        y1, y2, x1 = self.DAY_BAND
+        band = img[y1:y2, x1:]
+        hsv = cv2.cvtColor(band, cv2.COLOR_BGR2HSV)
         out = []
-        for ln in ocr.read(band, scale=2.0):
-            txt = ln.text.strip()
-            if txt.isdigit() and 1 <= int(txt) <= 31:
-                cx, cy = ln.center
-                out.append((int(txt), cx + 400, cy + 95))
+        for ln in ocr.read(band, scale=2.5):
+            if "-" in ln.text or "/" in ln.text:
+                continue                      # do la nhan ngay "2026-08-24"
+            tu = ln.words[0] if ln.words else None
+            if tu is None:
+                continue
+            so = "".join(c for c in tu.text if c.isdigit())
+            if not (1 <= len(so) <= 2) or not (1 <= int(so) <= 31):
+                continue
+            bx, by, bw, bh = tu.box
+            o = hsv[max(0, by):by + bh, max(0, bx):bx + bw]
+            dang_chon = bool(o.size) and float(o[:, :, 1].mean()) > 60
+            out.append((int(so), bx + bw // 2 + x1, by + bh // 2 + y1, dang_chon))
+        if len(out) >= 3:
+            # cac the ngay nam tren cung mot hang -> loai chu so lac tu cho khac
+            ys = sorted(t[2] for t in out)
+            giua = ys[len(ys) // 2]
+            out = [t for t in out if abs(t[2] - giua) <= 10]
+        out.sort()
         return out
 
-    def select_day(self, day):
-        for d, x, y in self.day_tabs():
-            if d == day:
-                self.click(x, y, settle=2.4)
+    def ngay_dang_chon(self, img=None):
+        for d, _x, _y, chon in self.day_tabs(img):
+            if chon:
+                return d
+        return None
+
+    def cho_ngay(self, day, giay=10.0):
+        """Cho den khi the ngay `day` thuc su duoc chon (trang dang tai lai)."""
+        het = time.time() + giay
+        while time.time() < het:
+            if self.ngay_dang_chon() == day:
                 return True
+            time.sleep(1.2)
+        return False
+
+    def select_day(self, day, thu=4):
+        """Chon dung ngay va XAC MINH lai; tu lat trang neu ngay chua hien.
+
+        Rat quan trong: neu bam hut ma khong kiem tra thi se lay nham du lieu
+        cua ngay khac ma khong hay biet.
+        """
+        for lan in range(thu):
+            tabs = self.day_tabs()
+            if not tabs:
+                time.sleep(1.5)
+                continue
+            if self.ngay_dang_chon() == day:
+                return True
+
+            dung = [t for t in tabs if t[0] == day]
+            if dung:
+                _d, x, y, _c = dung[0]
+                self.click(x, y, settle=2.6)
+                if self.cho_ngay(day):        # trang tai lai -> phai cho roi moi kiem tra
+                    return True
+                continue
+
+            # ngay can tim khong nam trong dai dang hien -> lat sang trai/phai
+            nho_nhat = min(t[0] for t in tabs)
+            lui = day < nho_nhat or day > max(t[0] for t in tabs)
+            if not lui:
+                continue
+            x_mui_ten = min(t[1] for t in tabs) - 58        # nut '<' truoc the dau
+            if day > max(t[0] for t in tabs):
+                x_mui_ten = max(t[1] for t in tabs) + 58     # nut '>' sau the cuoi
+            self.click(x_mui_ten, tabs[0][2], settle=2.2)
         return False
 
     # ---------- quet the su kien ----------
@@ -344,7 +408,15 @@ def thu_thap(cfg, ngay=None, on_found=None, log=print):
 
     log(u"• Mở trung tâm tin nhắn…")
     if not ui.open_message_center():
-        raise RuntimeError(u"Không mở được trung tâm tin nhắn của Imou.")
+        # App vua khoi dong co the con dang tai du lieu -> cho roi thu lai
+        for lan in (1, 2):
+            log(u"  chưa vào được, chờ 10 giây rồi thử lại (lần %d)…" % lan)
+            time.sleep(10)
+            ui.attach()
+            if ui.open_message_center():
+                break
+        else:
+            raise RuntimeError(u"Không mở được trung tâm tin nhắn của Imou.")
 
     ten = cfg.get("camera_name", "")
     log(u"• Chọn camera %s…" % ten)
@@ -357,7 +429,10 @@ def thu_thap(cfg, ngay=None, on_found=None, log=print):
 
     log(u"• Chọn ngày %s…" % ngay.strftime("%d-%m-%Y"))
     if not ui.select_day(ngay.day):
-        log(u"  (!) Không thấy tab ngày %d – dùng ngày đang mở sẵn." % ngay.day)
+        raise RuntimeError(
+            u"Không chọn được ngày %d trong Imou (đang mở ngày %s). "
+            u"Dừng lại để tránh lấy nhầm dữ liệu của ngày khác."
+            % (ngay.day, ui.ngay_dang_chon()))
 
     log(u"• Đang quét danh sách sự kiện…")
     try:

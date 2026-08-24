@@ -13,6 +13,11 @@ DEFAULTS = {
     # "auto" = uu tien PrintWindow (chup duoc ca khi bi che), "manhinh" = chup man hinh
     "capture_mode": "auto",
 
+    # --- Tu mo app Imou khi no chua chay (can cho lich chay tu dong) ---
+    "tu_mo_imou": True,
+    "duong_dan_imou": "C:\\Program Files\\Imou_en\\bin\\Imou_en.exe",
+    "cho_imou_giay": 90,              # cho toi da bao nhieu giay de cua so hien ra
+
     # Vung chup (ty le so voi cua so Imou, 0..1). Mac dinh = vung khung hinh video.
     "roi": {"left": 0.1914, "top": 0.1134, "right": 0.9843, "bottom": 0.9106},
 

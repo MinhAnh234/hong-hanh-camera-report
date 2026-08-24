@@ -14,12 +14,12 @@
       "gio": 9,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.929,
+      "do_tin_cay": 0.871,
       "khung": [
-        801,
-        332,
-        163,
-        92
+        723,
+        312,
+        107,
+        86
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -61,12 +61,12 @@
       "gio": 14,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.867,
+      "do_tin_cay": 0.922,
       "khung": [
-        751,
-        322,
-        162,
-        96
+        693,
+        314,
+        119,
+        76
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -87,11 +87,11 @@
       "gio": 15,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.892,
+      "do_tin_cay": 0.864,
       "khung": [
-        548,
+        547,
         265,
-        49,
+        53,
         42
       ],
       "quang_duong_px": null,
@@ -113,12 +113,12 @@
       "gio": 15,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.853,
+      "do_tin_cay": 0.852,
       "khung": [
-        636,
-        307,
-        76,
-        60
+        634,
+        309,
+        80,
+        61
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -139,12 +139,12 @@
       "gio": 15,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.695,
+      "do_tin_cay": 0.646,
       "khung": [
-        635,
-        266,
-        48,
-        39
+        630,
+        260,
+        94,
+        49
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -163,14 +163,14 @@
       "stt": 7,
       "thoi_gian": "2026-08-23 15:56:16",
       "gio": 15,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.758,
+      "loai_xe": "car",
+      "loai_xe_vi": "Xe ô tô",
+      "do_tin_cay": 0.848,
       "khung": [
-        678,
-        313,
-        101,
-        70
+        650,
+        312,
+        70,
+        59
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -178,8 +178,8 @@
         1545,
         848
       ],
-      "anh": "007_truck_20260823-155616.jpg",
-      "anh_danh_dau": "007_truck_20260823-155616_danhdau.jpg",
+      "anh": "007_car_20260823-155616.jpg",
+      "anh_danh_dau": "007_car_20260823-155616_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
       "ghi_chu": ""
@@ -191,12 +191,12 @@
       "gio": 16,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.805,
+      "do_tin_cay": 0.927,
       "khung": [
-        731,
-        322,
-        133,
-        87
+        746,
+        328,
+        161,
+        85
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
@@ -217,12 +217,12 @@
       "gio": 16,
       "loai_xe": "truck",
       "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.778,
+      "do_tin_cay": 0.842,
       "khung": [
-        611,
-        282,
-        42,
-        48
+        607,
+        274,
+        45,
+        45
       ],
       "quang_duong_px": null,
       "so_khung_hinh": null,
