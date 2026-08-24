@@ -2,6 +2,9 @@
   "window_title": "Imou",
   "camera_name": "AOV PT-BE57",
   "capture_mode": "auto",
+  "tu_mo_imou": true,
+  "duong_dan_imou": "C:\\Program Files\\Imou_en\\bin\\Imou_en.exe",
+  "cho_imou_giay": 90,
   "roi": {
     "left": 0.1906,
     "top": 0.1124,
@@ -36,6 +39,9 @@
     "truck",
     "bus"
   ],
+  "huong_xe": "trai_sang_phai",
+  "huong_min_dx": 25,
+  "giu_khi_khong_ro_huong": true,
   "track_min_hits": 2,
   "track_min_move_px": 5,
   "track_max_missing": 30,

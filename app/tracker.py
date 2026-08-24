@@ -78,6 +78,17 @@ class Track(object):
         return max(self.votes.items(), key=lambda kv: kv[1])[0]
 
     @property
+    def dx(self):
+        """Quang duong theo TRUC NGANG: duong = di sang phai, am = sang trai."""
+        return self.last_pt[0] - self.start_pt[0]
+
+    def huong(self, min_dx=25):
+        """'trai_sang_phai' | 'phai_sang_trai' | None (chua du de ket luan)."""
+        if abs(self.dx) < min_dx:
+            return None
+        return "trai_sang_phai" if self.dx > 0 else "phai_sang_trai"
+
+    @property
     def displacement(self):
         return math.hypot(self.last_pt[0] - self.start_pt[0],
                           self.last_pt[1] - self.start_pt[1])

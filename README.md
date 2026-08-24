@@ -68,6 +68,28 @@ sự kiện 15:43:16 ──khớp──► clip 15:43:15 ──phát──► ch
 Nhờ vậy báo cáo còn biết luôn **loại xe** (xe ben / xe ô tô) chứ không chỉ "Phương tiện".
 Muốn bỏ bước này cho nhanh thì thêm `--khong-anh-net` (ảnh sẽ mờ).
 
+### Chỉ lấy xe ra khỏi mỏ (đi từ trái qua phải)
+
+Trong lúc phát clip, app bám vết chiếc xe qua nhiều khung hình để biết nó đi
+**trái → phải** (ra khỏi mỏ) hay **phải → trái** (vào mỏ). Chỉ lượt ra khỏi mỏ
+mới được đưa vào báo cáo:
+
+```
+15:17:07  ← clip 15:17:07   ✔ xe ben 86% – hướng trái → phải (ra khỏi mỏ)
+14:57:00  ← clip 14:56:58   ⏭ bỏ qua: xe đi phải → trái (lệch ngang -164 px)
+```
+
+Chỉnh trong `config.json`:
+
+| Khoá | Ý nghĩa | Mặc định |
+|---|---|---|
+| `huong_xe` | `trai_sang_phai` / `phai_sang_trai` / `ca_hai` | `trai_sang_phai` |
+| `huong_min_dx` | Xe phải dịch ngang ít nhất bao nhiêu điểm ảnh mới kết luận hướng | `25` |
+| `giu_khi_khong_ro_huong` | Vẫn giữ lượt không đoán được hướng (xe đứng yên, chỉ thấy 1 khung hình) | `true` |
+
+Lọc hướng **chỉ hoạt động khi có bước chụp ảnh nét** — chạy với `--khong-anh-net`
+thì không biết hướng nên giữ tất cả.
+
 Lưu ý khi chạy chế độ A:
 - App **tự điều khiển chuột** và đưa cửa sổ Imou lên trên → đừng dùng chuột trong lúc
   chạy (khoảng 4–6 phút cho một ngày ~10 sự kiện).

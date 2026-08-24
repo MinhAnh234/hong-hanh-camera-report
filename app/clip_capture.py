@@ -22,6 +22,8 @@ from .capture import detect_video_rect, list_windows, print_window
 from .imou_events import ImouUI
 
 PLAYER_TITLE = "SinglePlayerDlg"
+TEN_HUONG = {"trai_sang_phai": u"trái → phải (ra khỏi mỏ)",
+             "phai_sang_trai": u"phải → trái (vào mỏ)"}
 _GIO = re.compile(r"^(\d{2})(\d{2})(\d{2})$")
 
 
@@ -145,11 +147,14 @@ def _co_hinh(khung, nguong=12.0):
     return khung is not None and khung.size > 0 and float(khung.std()) >= nguong
 
 
-def chup_tu_player(hwnd, detector, so_khung=10, moi_khung=0.7, cho_toi_da=14.0):
+def chup_tu_player(hwnd, detector, cfg=None, so_khung=12, moi_khung=0.7,
+                   cho_toi_da=14.0):
     """Chup nhieu khung hinh trong luc clip chay, chon khung co xe ro nhat.
 
-    Tra ve (anh_BGR, detection_tot_nhat | None). Bo qua nhung khung hinh trong
-    (man hinh cho mau xam) de khong luu nham anh khong co gi.
+    Dong thoi BAM VET xe qua cac khung hinh de biet no di TU TRAI QUA PHAI hay
+    nguoc lai (xe ra khoi mo hay vao mo).
+
+    Tra ve (anh_BGR, detection_tot_nhat | None, huong | None, dx).
     """
     img = print_window(hwnd)
     if img is None:
@@ -176,6 +181,11 @@ def chup_tu_player(hwnd, detector, so_khung=10, moi_khung=0.7, cho_toi_da=14.0):
             da_bam_lai = True
         time.sleep(0.6)
 
+    bam = None
+    if detector is not None and cfg is not None:
+        from .tracker import VehicleTracker
+        bam = VehicleTracker(cfg)
+
     tot_anh, tot_det, tot_diem = None, None, -1.0
     du_phong, truoc, dung_yen = None, None, 0
     for i in range(so_khung):
@@ -197,12 +207,23 @@ def chup_tu_player(hwnd, detector, so_khung=10, moi_khung=0.7, cho_toi_da=14.0):
                     du_phong = khung.copy()
                 if detector is not None:
                     ca = [(0, 0, khung.shape[1], khung.shape[0])]
-                    for d in detector.detect_regions(khung, ca):
+                    dets = detector.detect_regions(khung, ca)
+                    if bam is not None:
+                        bam.update(dets, khung, i * moi_khung)
+                    for d in dets:
                         diem = d.conf * (1.0 + d.area / 1e6)
                         if diem > tot_diem:
                             tot_diem, tot_det, tot_anh = diem, d, khung.copy()
         time.sleep(moi_khung)
-    return (tot_anh if tot_anh is not None else du_phong), tot_det
+
+    huong, dx = None, 0.0
+    if bam is not None:
+        vets = [t for t in bam.tracks if t.hits >= 2]
+        if vets:
+            v = max(vets, key=lambda t: abs(t.dx))     # vet di xa nhat theo chieu ngang
+            dx = v.dx
+            huong = v.huong(float(cfg.get("huong_min_dx", 25)))
+    return (tot_anh if tot_anh is not None else du_phong), tot_det, huong, dx
 
 
 # ---------------------------------------------------------------- luong chinh
@@ -333,8 +354,24 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
                 log(u"     (!) Không mở được clip, bỏ qua.")
                 con_lai.remove(ev)
                 continue
-            anh, det = chup_tu_player(h, detector)
+            anh, det, huong, dx = chup_tu_player(h, detector, cfg)
             _close_player()
+
+            mong_muon = cfg.get("huong_xe", "ca_hai")
+            ev["huong"] = huong
+            ev["dx"] = round(float(dx), 1)
+            if (mong_muon != "ca_hai" and huong is None
+                    and not cfg.get("giu_khi_khong_ro_huong", True)):
+                ev["bo_qua"] = u"không xác định được hướng"
+                log(u"     ⏭ bỏ qua: %s" % ev["bo_qua"])
+                con_lai.remove(ev)
+                continue
+            if mong_muon != "ca_hai" and huong is not None and huong != mong_muon:
+                ev["bo_qua"] = u"xe đi %s" % TEN_HUONG.get(huong, huong)
+                log(u"     ⏭ bỏ qua: %s (lệch ngang %+.0f px)"
+                    % (ev["bo_qua"], dx))
+                con_lai.remove(ev)
+                continue
 
             if anh is not None:
                 ev["anh_net"] = anh
@@ -342,9 +379,10 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
                 ev["tin_cay"] = round(float(det.conf), 3) if det is not None else None
                 ev["loai_xe_net"] = det.label if det is not None else None
                 xong += 1
-                log(u"     ✔ ảnh %dx%d%s" % (
+                log(u"     ✔ ảnh %dx%d%s%s" % (
                     anh.shape[1], anh.shape[0],
-                    u" – nhận ra %s %.0f%%" % (det.label, det.conf * 100) if det else u""))
+                    u" – nhận ra %s %.0f%%" % (det.label, det.conf * 100) if det else u"",
+                    u" – hướng %s" % TEN_HUONG[huong] if huong else u" – chưa rõ hướng"))
             else:
                 log(u"     (!) Không chụp được khung hình.")
             con_lai.remove(ev)

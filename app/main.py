@@ -79,6 +79,16 @@ def _doc_su_kien_camera(ngay_str, open_report, anh_net=True):
         except Exception as e:
             print(u"(!) Không chụp được ảnh nét: %s" % e)
 
+    bo = [e for e in events if e.get("bo_qua")]
+    if bo:
+        print(u"Bỏ qua %d lượt không đúng hướng cần theo dõi:" % len(bo))
+        for e in bo:
+            print(u"   - %s (%s)" % (e["thoi_gian"][11:], e["bo_qua"]))
+        events = [e for e in events if not e.get("bo_qua")]
+    if not events:
+        print(u"Không còn lượt nào sau khi lọc theo hướng.")
+        return 1
+
     sid = "SUKIEN-" + ngay.strftime("%Y%m%d")
     sess = storage.Session(cfg, session_id=sid)
     sess.meta["nguon"] = u"Sự kiện phát hiện phương tiện của camera Imou"
@@ -97,7 +107,11 @@ def _doc_su_kien_camera(ngay_str, open_report, anh_net=True):
                                  ev["anh"]))
     sess._flush()
 
-    print(u"Tổng cộng %d sự kiện phương tiện." % len(events))
+    print(u"Tổng cộng %d lượt xe %s."
+          % (len(events),
+             {"trai_sang_phai": u"đi trái → phải (ra khỏi mỏ)",
+              "phai_sang_trai": u"đi phải → trái"}.get(
+                  cfg.get("huong_xe", "ca_hai"), u"(mọi hướng)")))
     path = report.build(sid)
     report.build_index()
     print(u"Báo cáo: %s" % path)

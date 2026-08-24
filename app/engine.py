@@ -78,6 +78,9 @@ class MonitorEngine(object):
         interval = 1.0 / max(float(cfg.get("fps", 5.0)), 0.5)
         cooldown = float(cfg.get("event_cooldown_sec", 4.0))
         min_motion_in_box = float(cfg.get("min_motion_in_box", 0.01))
+        huong_can = cfg.get("huong_xe", "ca_hai")
+        huong_min_dx = float(cfg.get("huong_min_dx", 25))
+        giu_khong_ro = bool(cfg.get("giu_khi_khong_ro_huong", True))
         last_status = 0.0
         state = u"ĐANG GIÁM SÁT"
 
@@ -112,6 +115,12 @@ class MonitorEngine(object):
 
                 now = time.time()
                 for tr in tracker.update(dets, frame, now):
+                    if huong_can != "ca_hai":
+                        h = tr.huong(huong_min_dx)
+                        if h is None and not giu_khong_ro:
+                            continue
+                        if h is not None and h != huong_can:
+                            continue
                     prev = self._last_event_ts.get(tr.label, 0.0)
                     if now - prev < cooldown:
                         continue

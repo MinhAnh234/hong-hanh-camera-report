@@ -53,6 +53,13 @@ DEFAULTS = {
     },
     "watch_classes": ["car", "truck", "bus"],   # loai xe can bat su kien
 
+    # --- Loc theo HUONG DI CHUYEN cua xe ---
+    # "trai_sang_phai" = chi lay xe di tu trai qua phai (xe ra khoi mo)
+    # "phai_sang_trai" = nguoc lai ; "ca_hai" = lay tat ca
+    "huong_xe": "trai_sang_phai",
+    "huong_min_dx": 25,               # so diem anh toi thieu theo truc ngang de ket luan
+    "giu_khi_khong_ro_huong": True,   # van giu lai luot khong xac dinh duoc huong
+
     # --- Bam vet & luu su kien ---
     "track_min_hits": 2,              # so lan thay lien tiep truoc khi xac nhan
     "track_min_move_px": 5,          # quang duong toi thieu de coi la "dang chuyen dong"
