@@ -147,7 +147,7 @@ def _co_hinh(khung, nguong=12.0):
     return khung is not None and khung.size > 0 and float(khung.std()) >= nguong
 
 
-def chup_tu_player(hwnd, detector, cfg=None, so_khung=12, moi_khung=0.7,
+def chup_tu_player(hwnd, detector, cfg=None, so_khung=16, moi_khung=0.8,
                    cho_toi_da=14.0):
     """Chup nhieu khung hinh trong luc clip chay, chon khung co xe ro nhat.
 
@@ -317,24 +317,38 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
             khong_khop.append(ev)
             continue
         can_mo.setdefault(gan, []).append((ev, abs(_giay(gan) - muc)))
-    log(u"  ghép được %d/%d sự kiện với clip." % (len(events) - len(khong_khop), len(events)))
+    khop = len(events) - len(khong_khop)
+    log(u"  ghép được %d/%d sự kiện với clip." % (khop, len(events)))
+
+    # An toan: neu ghep hong gan het thi day la loi doc giao dien, KHONG phai
+    # do xe di sai huong -> giu nguyen moi su kien thay vi xoa sach bao cao.
+    if khop < max(1, len(events) * 0.5):
+        log(u"  (!) Ghép clip thất bại (%d/%d) – bỏ qua bước lọc hướng lần này, "
+            u"giữ nguyên tất cả sự kiện." % (khop, len(events)))
+        ui.tra_lai()
+        return 0
 
     # ---- Buoc 3: cuon lai tu dau, mo dung nhung clip da chon ----
     xong = 0
     con_lai = dict(can_mo)
-    ui.scroll(-40)
-    time.sleep(1.2)
-    for _vong in range(80):
+    len_dau_danh_sach(ui)
+    for _vong in range(110):
         if not con_lai:
             break
-        the = _the_hien_tren_man(ui)
-        lam = [(c, t) for c, t in the if t in con_lai]
-        if not lam:
+        # So khop theo DO LECH GIAY chu khong so chuoi: hai lan OCR cung mot the
+        # co the ra chuoi hoi khac nhau ("17:07:40" vs "17:07:4O").
+        lam = None
+        for c, t in _the_hien_tren_man(ui):
+            khoa = _khop_gan(t, con_lai)
+            if khoa:
+                lam = (c, t, khoa)
+                break
+        if lam is None:
             ui.scroll(4)
             continue
 
-        card, t = lam[0]
-        nhom = con_lai.pop(t)
+        card, t, khoa = lam
+        nhom = con_lai.pop(khoa)
         xa, ya, xb, yb = card
         ui.click((xa + xb) // 2, (ya + yb) // 2, double=True, settle=2.0)
         h = _cho_player()
@@ -373,6 +387,29 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
     return xong
 
 
+def len_dau_danh_sach(ui, nac=220):
+    """Cuon len dau danh sach.
+
+    Mot ngay co the co hon 150 clip nen phai cuon that nhieu nac; cuon thieu se
+    bat dau tu GIUA danh sach va bo sot toan bo phan tren.
+    """
+    ui.scroll(-nac)
+    time.sleep(1.5)
+    return True
+
+
+def _khop_gan(gio, cac_khoa, dung_sai=3):
+    """Tim khoa trong `cac_khoa` co gio lech khong qua `dung_sai` giay."""
+    try:
+        muc = _giay(gio)
+    except Exception:
+        return None
+    for k in cac_khoa:
+        if abs(_giay(k) - muc) <= dung_sai:
+            return k
+    return None
+
+
 def _the_hien_tren_man(ui, thu=4):
     """Cac the clip dang hien + gio cua chung (cho anh thumbnail tai xong)."""
     for _ in range(thu):
@@ -385,20 +422,21 @@ def _the_hien_tren_man(ui, thu=4):
     return []
 
 
-def quet_danh_sach_clip(ui, log=None, toi_da=80):
-    """Cuon het danh sach mot luot, ghi lai gio cua tat ca clip nhin thay."""
+def quet_danh_sach_clip(ui, log=None, toi_da=70):
+    """Cuon het danh sach mot luot, ghi lai gio cua tat ca clip nhin thay.
+
+    Dung lai khi CHAM DAY danh sach (man hinh khong doi sau khi cuon), chu khong
+    dung khi gap man hinh trong - vi anh thumbnail co the chi dang tai cham.
+    """
     thay = set()
-    ui.scroll(-40)                     # ve dau danh sach
-    time.sleep(1.2)
-    khong_moi = 0
+    len_dau_danh_sach(ui)              # ve dau danh sach
+    truoc, giong = None, 0
     for _ in range(toi_da):
-        them = 0
-        for _c, t in _the_hien_tren_man(ui):
-            if t not in thay:
-                thay.add(t)
-                them += 1
-        khong_moi = 0 if them else khong_moi + 1
-        if khong_moi >= 3:
+        hien = set(t for _c, t in _the_hien_tren_man(ui))
+        thay |= hien
+        giong = giong + 1 if (hien and hien == truoc) else 0
+        truoc = hien
+        if giong >= 2:                 # cuoi danh sach
             break
         ui.scroll(4)
     return thay

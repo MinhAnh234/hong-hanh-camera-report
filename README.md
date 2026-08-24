@@ -85,10 +85,15 @@ Chỉnh trong `config.json`:
 |---|---|---|
 | `huong_xe` | `trai_sang_phai` / `phai_sang_trai` / `ca_hai` | `trai_sang_phai` |
 | `huong_min_dx` | Xe phải dịch ngang ít nhất bao nhiêu điểm ảnh mới kết luận hướng | `25` |
-| `giu_khi_khong_ro_huong` | Vẫn giữ lượt không đoán được hướng (xe đứng yên, chỉ thấy 1 khung hình) | `true` |
+| `giu_khi_khong_ro_huong` | Giữ lại lượt **không xác định được hướng** (không ghép được clip, hoặc xe dịch chuyển quá ít) | `false` |
 
 Lọc hướng **chỉ hoạt động khi có bước chụp ảnh nét** — chạy với `--khong-anh-net`
 thì không biết hướng nên giữ tất cả.
+
+Cách ghép clip: app **quét hết danh sách clip của ngày trước** (ghi lại giờ của từng
+clip), rồi mới chọn clip gần nhất cho mỗi sự kiện và mở đúng những clip đó. Nhờ vậy
+không còn cảnh vừa cuộn vừa đoán, bỏ sót clip. Mỗi clip được xem ~13 giây để có đủ
+khung hình xác định hướng.
 
 Lưu ý khi chạy chế độ A:
 - App **tự điều khiển chuột** và đưa cửa sổ Imou lên trên → đừng dùng chuột trong lúc
@@ -123,8 +128,8 @@ index.html                                  ← BÁO CÁO GỘP (3 ngày gần n
 reports/BaoCao_toan_bo.html                 ← báo cáo gộp ĐẦY ĐỦ mọi ngày (chỉ ở máy)
 ```
 
-**Tất cả các ngày nằm chung MỘT báo cáo**, không tách file theo ngày. Trong bảng có
-thêm ô lọc **Ngày** bên cạnh ô lọc giờ và loại xe.
+**Tất cả các ngày nằm chung MỘT báo cáo**, không tách file theo ngày, sắp xếp
+**từ sớm đến muộn**. Trong bảng có thêm ô lọc **Ngày** bên cạnh ô lọc giờ và loại xe.
 
 ### Dung lượng GitHub
 
