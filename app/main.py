@@ -48,6 +48,7 @@ def _run_headless(minutes, open_report):
     print(u"Ket thuc: %d khung hinh, %d lan chuyen dong, %d luot xe."
           % (st["khung_hinh"], st["lan_chuyen_dong"], st["su_kien"]))
     path = report.build(session.session_id)
+    report.sinh_bao_cao()
     print(u"Bao cao: %s" % path)
     if open_report:
         try:
@@ -112,12 +113,10 @@ def _doc_su_kien_camera(ngay_str, open_report, anh_net=True):
              {"trai_sang_phai": u"đi trái → phải (ra khỏi mỏ)",
               "phai_sang_trai": u"đi phải → trái"}.get(
                   cfg.get("huong_xe", "ca_hai"), u"(mọi hướng)")))
-    path = report.build(sid)
-    report.build_index()
-    print(u"Báo cáo: %s" % path)
+    web, _day_du = report.sinh_bao_cao(log=print)
     if open_report:
         try:
-            os.startfile(path)
+            os.startfile(web)
         except Exception:
             pass
     return 0
@@ -138,7 +137,7 @@ def main(argv=None):
     p.add_argument("--khong-anh-net", action="store_true", dest="khong_anh_net",
                    help=u"bo qua buoc mo clip de chup anh net (nhanh hon, anh mo)")
     p.add_argument("--trang-chu", action="store_true", dest="trang_chu",
-                   help=u"sinh lai index.html liet ke tat ca bao cao")
+                   help=u"sinh lai bao cao gop (index.html + ban day du)")
     p.add_argument("--danh-sach", action="store_true", help=u"liet ke cac phien da co")
     p.add_argument("--khong-mo", action="store_true", help=u"khong tu mo file bao cao")
     args = p.parse_args(argv)
@@ -154,12 +153,12 @@ def main(argv=None):
         return 0
 
     if args.trang_chu:
-        print(u"Trang chủ: %s" % report.build_index())
+        report.sinh_bao_cao(log=print)
         return 0
 
     if args.bao_cao:
         path = report.build(args.bao_cao)
-        report.build_index()
+        report.sinh_bao_cao()
         print(u"Bao cao: %s" % path)
         if not args.khong_mo:
             try:

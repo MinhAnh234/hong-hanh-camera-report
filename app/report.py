@@ -2,6 +2,7 @@
 """Sinh file bao cao HTML: mot bang danh sach gon, anh bam vao phong to duoc."""
 import html
 import os
+from collections import Counter
 from datetime import datetime
 
 from . import storage
@@ -146,6 +147,7 @@ footer{margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
   <div class="loc">
     <label>Từ <input type="time" id="tu"></label>
     <label>đến <input type="time" id="den"></label>
+    <label>Ngày <select id="loc_ngay">__CHON_NGAY__</select></label>
     <label>Loại xe <select id="loc_loai">__CHON_LOAI__</select></label>
     <button type="button" class="xoa" id="xoaloc">Xoá lọc</button>
     <span class="dem" id="dem"></span>
@@ -170,7 +172,8 @@ footer{margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
 <script>
 (function(){
   var tu = document.getElementById('tu'), den = document.getElementById('den'),
-      loai = document.getElementById('loc_loai'), dem = document.getElementById('dem'),
+      loai = document.getElementById('loc_loai'), ngay = document.getElementById('loc_ngay'),
+      dem = document.getElementById('dem'),
       trong = document.getElementById('khongco'),
       dong = Array.prototype.slice.call(document.querySelectorAll('tbody tr'));
 
@@ -182,21 +185,26 @@ footer{margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
     return (+p[0]) * 3600 + (+p[1]) * 60 + gy;
   }
   function loc(){
-    var a = giay(tu.value, false), b = giay(den.value, true), k = loai.value, hien = 0;
+    var a = giay(tu.value, false), b = giay(den.value, true), k = loai.value,
+        n = ngay ? ngay.value : '', hien = 0;
     dong.forEach(function(tr){
       var t = giay(tr.dataset.gio, false), ok = true;
       if (a !== null && t < a) ok = false;
       if (b !== null && t > b) ok = false;
       if (k && tr.dataset.loai !== k) ok = false;
+      if (n && tr.dataset.ngay !== n) ok = false;
       tr.classList.toggle('an', !ok);
       if (ok) hien++;
     });
     dem.textContent = hien + '/' + dong.length + ' lượt';
     trong.classList.toggle('hien', hien === 0);
   }
-  [tu, den, loai].forEach(function(o){ o.addEventListener('change', loc); o.addEventListener('input', loc); });
+  [tu, den, loai, ngay].forEach(function(o){
+    if (!o) return;
+    o.addEventListener('change', loc); o.addEventListener('input', loc);
+  });
   document.getElementById('xoaloc').addEventListener('click', function(){
-    tu.value = ''; den.value = ''; loai.value = ''; loc();
+    tu.value = ''; den.value = ''; loai.value = ''; if (ngay) ngay.value = ''; loc();
   });
   loc();
 })();
@@ -297,7 +305,7 @@ def _esc(s):
     return html.escape(s)
 
 
-def _bang(events, prefix):
+def _bang(events, prefix=""):
     if not events:
         return u'<div class="tablewrap"><div class="empty">Chưa ghi nhận lượt xe nào.</div></div>'
     rows = []
@@ -310,18 +318,20 @@ def _bang(events, prefix):
         if e.get("thoi_gian_chac_chan") is False:
             gio += u' <span class="uoc" title="Mốc giờ đọc tự động, nên đối chiếu lại">≈</span>'
 
+        pfx = e.get("_pfx", prefix)
         thumb = e.get("anh_danh_dau") or e.get("anh")
         full = e.get("anh") or thumb
         chu = u"%s · %s · %s" % (e.get("ma_luot", ""), ten, e.get("thoi_gian", ""))
         anh = (u'<img loading="lazy" src="%s%s" data-full="%s%s" data-chu="%s" alt="%s">'
-               % (prefix, _esc(thumb), prefix, _esc(full), _esc(chu), _esc(chu)))
+               % (pfx, _esc(thumb), pfx, _esc(full), _esc(chu), _esc(chu)))
 
         rows.append(
-            u'<tr data-gio="%s" data-loai="%s">'
+            u'<tr data-gio="%s" data-ngay="%s" data-loai="%s">'
             u'<td class="stt">%d</td><td class="gio">%s</td>'
             u'<td class="loai"><span class="pill %s">%s</span></td>'
             u'<td class="anh">%s</td></tr>'
-            % (_esc(e.get("thoi_gian", "")[11:]), _esc(loai), i, gio, cls, _esc(ten), anh)
+            % (_esc(e.get("thoi_gian", "")[11:]), _esc(e.get("thoi_gian", "")[:10]),
+               _esc(loai), i, gio, cls, _esc(ten), anh)
         )
     return (u'<div class="tablewrap"><table><thead><tr>'
             u"<th>STT</th><th>Thời gian</th><th>Loại xe</th><th>Hình ảnh</th>"
@@ -379,80 +389,86 @@ def build(session_id, out_path=None):
     return out_path
 
 
-# ---------------------------------------------------------------- trang chu
-TRANG_CHU = u"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Báo cáo camera – Hong Hanh Company</title>
-<style>
-:root{--bg:#f4f6fa;--card:#fff;--ink:#131722;--muted:#5b6577;--line:#e2e7f0;--accent:#1f6feb;
-  --shadow:0 1px 3px rgba(16,24,40,.08),0 8px 24px rgba(16,24,40,.06)}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;
-  --muted:#9aa4b2;--line:#252c37;--accent:#4b93ff;--shadow:0 1px 3px rgba(0,0,0,.5)}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
-  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:32px 18px 60px}
-h1{font-size:27px;margin:0 0 4px}
-.sub{color:var(--muted);font-size:15px;margin-bottom:22px}
-a.the{display:flex;align-items:center;gap:16px;background:var(--card);color:inherit;
-  border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;
-  text-decoration:none;box-shadow:var(--shadow)}
-a.the:hover{border-color:var(--accent)}
-.ngay{font-size:18px;font-weight:700}
-.chi{color:var(--muted);font-size:14px}
-.so{margin-left:auto;background:var(--accent);color:#fff;border-radius:999px;
-  padding:5px 14px;font-weight:700;font-size:15px;white-space:nowrap}
-footer{margin-top:26px;color:var(--muted);font-size:14px;text-align:center}
-</style>
-</head>
-<body><div class="wrap">
-<h1>Báo cáo xe ra vào</h1>
-<div class="sub">__PHUDE__</div>
-__DANHSACH__
-<footer>__CHANTRANG__</footer>
-</div></body></html>
-"""
+# ---------------------------------------------------------------- gop nhieu ngay
+def _chon_ngay(events):
+    """Danh sach lua chon cho o loc 'Ngay'."""
+    ngays = sorted({e.get("thoi_gian", "")[:10] for e in events if e.get("thoi_gian")},
+                   reverse=True)
+    out = [u'<option value="">Tất cả</option>']
+    for n in ngays:
+        out.append(u'<option value="%s">%s</option>'
+                   % (_esc(n), _esc(u"-".join(reversed(n.split("-"))))))
+    return u"".join(out)
 
 
-def build_index(out_path=None):
-    """Sinh trang chu index.html liet ke tat ca bao cao da co."""
-    out_path = out_path or os.path.join(ROOT, "index.html")
-    rows, tong = [], 0
+def gom_su_kien(out_dir, gioi_han_ngay=None):
+    """Gop su kien cua tat ca cac phien lai. Moi su kien mang duong dan anh rieng."""
+    goi = []
     for sid in storage.list_sessions():
         try:
             data = storage.load_session(sid)
         except Exception:
             continue
-        meta = data.get("phien", {})
-        n = len(data.get("su_kien", []))
-        tong += n
-        bao_cao = u"reports/BaoCao_%s.html" % sid
-        if not os.path.exists(os.path.join(REPORT_DIR, u"BaoCao_%s.html" % sid)):
-            continue
-        ngay = (meta.get("bat_dau") or "")[:10]
-        if ngay:
-            ngay = u"-".join(reversed(ngay.split("-")))
-        rows.append(
-            u'<a class="the" href="%s"><span><span class="ngay">%s</span><br>'
-            u'<span class="chi">%s &middot; %s</span></span>'
-            u'<span class="so">%d lượt</span></a>'
-            % (_esc(bao_cao), _esc(ngay or sid), _esc(meta.get("camera", "")),
-               _esc(meta.get("nguon", "")), n)
-        )
-    if not rows:
-        rows = [u'<div class="chi">Chưa có báo cáo nào.</div>']
+        pfx = os.path.relpath(os.path.join(storage.CAPTURE_DIR, sid),
+                              out_dir).replace("\\", "/") + "/"
+        cam = data.get("phien", {}).get("camera", "")
+        for e in data.get("su_kien", []):
+            e = dict(e)
+            e["_pfx"] = pfx
+            e["_camera"] = cam
+            goi.append(e)
+    goi.sort(key=lambda e: e.get("thoi_gian", ""), reverse=True)   # moi nhat len dau
 
-    out = TRANG_CHU
+    if gioi_han_ngay:
+        giu = set(sorted({e.get("thoi_gian", "")[:10] for e in goi},
+                         reverse=True)[:gioi_han_ngay])
+        goi = [e for e in goi if e.get("thoi_gian", "")[:10] in giu]
+    return goi
+
+
+def build_all(out_path=None, gioi_han_ngay=None):
+    """Sinh MOT bao cao gop tat ca cac ngay. Tra ve (duong dan, so luot, so ngay)."""
+    out_path = out_path or os.path.join(ROOT, "index.html")
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    events = gom_su_kien(os.path.dirname(out_path) or ROOT, gioi_han_ngay)
+
+    ngays = sorted({e.get("thoi_gian", "")[:10] for e in events if e.get("thoi_gian")})
+    dem_cam = Counter(e.get("_camera", "") for e in events if e.get("_camera"))
+    cam = dem_cam.most_common(1)[0][0] if dem_cam else u"Camera"
+    cam = cam.split(u"–")[0].strip() or cam        # bo phan "- ban ghi ..." neu co
+    phude = u"%s &middot; %d lượt &middot; %d ngày" % (_esc(cam), len(events), len(ngays))
+    if ngays:
+        dau = u"-".join(reversed(ngays[0].split("-")))
+        cuoi = u"-".join(reversed(ngays[-1].split("-")))
+        phude += u" (%s)" % (dau if dau == cuoi else u"%s → %s" % (dau, cuoi))
+    if gioi_han_ngay:
+        phude += u" &middot; %d ngày gần nhất" % gioi_han_ngay
+
+    out = TEMPLATE
     for k, v in {
-        "__PHUDE__": _esc(u"Hong Hanh Company · %d ngày · %d lượt xe" % (len(rows), tong)),
-        "__DANHSACH__": _NL.join(rows),
+        "__TIEUDE__": _esc(u"Danh sách xe ra khỏi mỏ"),
+        "__PHUDE__": phude,
+        "__BANG__": _bang(events),
+        "__CHON_LOAI__": _chon_loai(events),
+        "__CHON_NGAY__": _chon_ngay(events),
         "__CHANTRANG__": _esc(u"Cập nhật lúc %s"
                               % datetime.now().strftime("%d-%m-%Y %H:%M")),
     }.items():
         out = out.replace(k, v)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(out)
-    return out_path
+    return out_path, len(events), len(ngays)
+
+
+NGAY_TREN_WEB = 3          # so ngay gan nhat duoc dua len GitHub
+
+
+def sinh_bao_cao(log=None):
+    """Sinh ca hai ban: ban dua len web (3 ngay gan nhat) va ban day du o may."""
+    noi = log or (lambda *_a: None)
+    web, n1, d1 = build_all(os.path.join(ROOT, "index.html"),
+                            gioi_han_ngay=NGAY_TREN_WEB)
+    noi(u"Báo cáo web (%d ngày gần nhất): %d lượt – %s" % (NGAY_TREN_WEB, n1, web))
+    day_du, n2, d2 = build_all(os.path.join(REPORT_DIR, "BaoCao_toan_bo.html"))
+    noi(u"Báo cáo đầy đủ tại máy (%d ngày): %d lượt – %s" % (d2, n2, day_du))
+    return web, day_du

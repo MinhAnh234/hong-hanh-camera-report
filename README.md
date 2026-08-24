@@ -115,13 +115,30 @@ là độ tin cậy), tránh việc mô hình lúc đọc "car" lúc đọc "tru
 ## Kết quả sinh ra
 
 ```
-captures/PHIEN-<ngày>-<giờ>/
+captures/SUKIEN-<ngày>/
     001_truck_20260823-163711.jpg           ← ảnh gốc toàn khung hình
     001_truck_20260823-163711_danhdau.jpg   ← ảnh có khung + nhãn + mã lượt
-    events.json                             ← dữ liệu thô của phiên
-reports/
-    BaoCao_PHIEN-<ngày>-<giờ>.html          ← báo cáo (mở bằng trình duyệt)
+    events.json                             ← dữ liệu thô của ngày đó
+index.html                                  ← BÁO CÁO GỘP (3 ngày gần nhất) – đẩy lên web
+reports/BaoCao_toan_bo.html                 ← báo cáo gộp ĐẦY ĐỦ mọi ngày (chỉ ở máy)
 ```
+
+**Tất cả các ngày nằm chung MỘT báo cáo**, không tách file theo ngày. Trong bảng có
+thêm ô lọc **Ngày** bên cạnh ô lọc giờ và loại xe.
+
+### Dung lượng GitHub
+
+Chỉ **3 ngày gần nhất** được đẩy lên GitHub; các ngày cũ hơn được gỡ khỏi repo nhưng
+**vẫn còn nguyên trong thư mục `captures/` ở máy**. Việc này do `app/git_sync.py` lo:
+nó chạy `git rm --cached` (không xoá file) và ghi vào `.git/info/exclude` để lần sau
+không thêm lại.
+
+```bat
+python -m app.git_sync          :: dọn thủ công
+```
+
+Đổi số ngày giữ lại: sửa `NGAY_TREN_WEB` trong `app/report.py` và `NGAY_MAC_DINH`
+trong `app/git_sync.py`.
 
 Báo cáo HTML là **một bảng danh sách gọn, 4 cột**:
 
