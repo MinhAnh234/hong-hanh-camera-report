@@ -417,7 +417,7 @@ def gom_su_kien(out_dir, gioi_han_ngay=None):
             e["_pfx"] = pfx
             e["_camera"] = cam
             goi.append(e)
-    goi.sort(key=lambda e: e.get("thoi_gian", ""), reverse=True)   # moi nhat len dau
+    goi.sort(key=lambda e: e.get("thoi_gian", ""))     # som nhat len dau
 
     if gioi_han_ngay:
         giu = set(sorted({e.get("thoi_gian", "")[:10] for e in goi},

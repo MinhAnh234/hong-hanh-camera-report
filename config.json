@@ -41,7 +41,7 @@
   ],
   "huong_xe": "trai_sang_phai",
   "huong_min_dx": 25,
-  "giu_khi_khong_ro_huong": true,
+  "giu_khi_khong_ro_huong": false,
   "track_min_hits": 2,
   "track_min_move_px": 5,
   "track_max_missing": 30,

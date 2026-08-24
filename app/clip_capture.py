@@ -302,92 +302,132 @@ def chup_anh_net(cfg, events, log=print, lech_toi_da=120):
     if not cho_the_clip(ui):
         log(u"  (!) Danh sách clip chưa hiện ra sau 20 giây.")
 
-    con_lai = sorted(events, key=lambda e: e["thoi_gian"], reverse=True)   # moi -> cu
-    xong = 0
+    # ---- Buoc 1: quet TOAN BO danh sach clip cua ngay de biet co nhung clip nao ----
+    log(u"• Quét toàn bộ danh sách clip trong ngày…")
+    gio_clip = quet_danh_sach_clip(ui, log)
+    log(u"  thấy %d clip." % len(gio_clip))
 
-    for lan in range(2):                 # quet 2 luot: luot 2 vot not su kien con sot
+    # ---- Buoc 2: ghep moi su kien voi clip gan nhat ----
+    can_mo = {}                       # gio_clip -> danh sach su kien
+    khong_khop = []
+    for ev in sorted(events, key=lambda e: e["thoi_gian"], reverse=True):
+        muc = _giay(ev["thoi_gian"][11:])
+        gan = min(gio_clip, key=lambda t: abs(_giay(t) - muc)) if gio_clip else None
+        if gan is None or abs(_giay(gan) - muc) > lech_toi_da:
+            khong_khop.append(ev)
+            continue
+        can_mo.setdefault(gan, []).append((ev, abs(_giay(gan) - muc)))
+    log(u"  ghép được %d/%d sự kiện với clip." % (len(events) - len(khong_khop), len(events)))
+
+    # ---- Buoc 3: cuon lai tu dau, mo dung nhung clip da chon ----
+    xong = 0
+    con_lai = dict(can_mo)
+    ui.scroll(-40)
+    time.sleep(1.2)
+    for _vong in range(80):
         if not con_lai:
             break
-        if lan:
-            log(u"• Quét lại lượt 2 cho %d sự kiện còn thiếu…" % len(con_lai))
-        ui.scroll(-30)                   # ve dau danh sach
-        time.sleep(1.0)
+        the = _the_hien_tren_man(ui)
+        lam = [(c, t) for c, t in the if t in con_lai]
+        if not lam:
+            ui.scroll(4)
+            continue
 
-        for _vong in range(60):
-            if not con_lai:
-                break
-            # anh thumbnail tai kieu "cuon toi dau tai toi do" -> cho no hien ra
-            the = []
-            for cho in range(4):
-                img = ui.shot()
-                the = [(c, read_clip_time(img, c)) for c in find_clip_cards(img)]
-                the = [(c, t) for c, t in the if t]
-                if the:
-                    break
-                time.sleep(1.8)
+        card, t = lam[0]
+        nhom = con_lai.pop(t)
+        xa, ya, xb, yb = card
+        ui.click((xa + xb) // 2, (ya + yb) // 2, double=True, settle=2.0)
+        h = _cho_player()
+        if h is None:
+            log(u"  (!) Không mở được clip %s." % t)
+            continue
+        anh, det, huong, dx = chup_tu_player(h, detector, cfg)
+        _close_player()
 
-            lam_gi = None
-            for ev in list(con_lai):
-                muc = _giay(ev["thoi_gian"][11:])
-                gan = None
-                for c, t in the:
-                    d = abs(_giay(t) - muc)
-                    if d <= lech_toi_da and (gan is None or d < gan[1]):
-                        gan = (c, d, t)
-                if gan:
-                    lam_gi = (ev, gan)
-                    break
-
-            if lam_gi is None:
-                ui.scroll(4)
-                continue
-
-            ev, (card, lech, gio_clip) = lam_gi
-            xa, ya, xb, yb = card
+        for ev, lech in nhom:
             log(u"  → %s  ← clip %s (lệch %ds)%s"
-                % (ev["thoi_gian"][11:], gio_clip, lech,
-                   u"  ⚠ lệch nhiều, có thể không đúng lượt" if lech > 60 else u""))
-            ui.click((xa + xb) // 2, (ya + yb) // 2, double=True, settle=2.0)
-
-            h = _cho_player()
-            if h is None:
-                log(u"     (!) Không mở được clip, bỏ qua.")
-                con_lai.remove(ev)
+                % (ev["thoi_gian"][11:], t, lech,
+                   u"  ⚠ lệch nhiều" if lech > 60 else u""))
+            if _loc_huong(ev, cfg, huong, dx, log) or anh is None:
+                if anh is None:
+                    log(u"     (!) Không chụp được khung hình.")
                 continue
-            anh, det, huong, dx = chup_tu_player(h, detector, cfg)
-            _close_player()
-
-            mong_muon = cfg.get("huong_xe", "ca_hai")
-            ev["huong"] = huong
-            ev["dx"] = round(float(dx), 1)
-            if (mong_muon != "ca_hai" and huong is None
-                    and not cfg.get("giu_khi_khong_ro_huong", True)):
-                ev["bo_qua"] = u"không xác định được hướng"
-                log(u"     ⏭ bỏ qua: %s" % ev["bo_qua"])
-                con_lai.remove(ev)
-                continue
-            if mong_muon != "ca_hai" and huong is not None and huong != mong_muon:
-                ev["bo_qua"] = u"xe đi %s" % TEN_HUONG.get(huong, huong)
-                log(u"     ⏭ bỏ qua: %s (lệch ngang %+.0f px)"
-                    % (ev["bo_qua"], dx))
-                con_lai.remove(ev)
-                continue
-
-            if anh is not None:
-                ev["anh_net"] = anh
-                ev["khung_xe"] = det.box if det is not None else None
-                ev["tin_cay"] = round(float(det.conf), 3) if det is not None else None
-                ev["loai_xe_net"] = det.label if det is not None else None
-                xong += 1
-                log(u"     ✔ ảnh %dx%d%s%s" % (
-                    anh.shape[1], anh.shape[0],
-                    u" – nhận ra %s %.0f%%" % (det.label, det.conf * 100) if det else u"",
-                    u" – hướng %s" % TEN_HUONG[huong] if huong else u" – chưa rõ hướng"))
-            else:
-                log(u"     (!) Không chụp được khung hình.")
-            con_lai.remove(ev)
+            ev["anh_net"] = anh
+            ev["khung_xe"] = det.box if det is not None else None
+            ev["tin_cay"] = round(float(det.conf), 3) if det is not None else None
+            ev["loai_xe_net"] = det.label if det is not None else None
+            xong += 1
+            log(u"     ✔ ảnh %dx%d%s – hướng %s" % (
+                anh.shape[1], anh.shape[0],
+                u" – nhận ra %s %.0f%%" % (det.label, det.conf * 100) if det else u"",
+                TEN_HUONG[huong] if huong else u"chưa rõ"))
 
     ui.tra_lai()                      # bo co "luon noi tren cung"
-    if con_lai:
-        log(u"  (!) Còn %d sự kiện không tìm thấy clip tương ứng." % len(con_lai))
+
+    # ---- Su kien khong co clip: khong the kiem tra huong ----
+    sot = khong_khop + [ev for nhom in con_lai.values() for ev, _l in nhom]
+    if sot:
+        log(u"  (!) %d sự kiện không mở được clip tương ứng." % len(sot))
+        for ev in sot:
+            _khong_ro_huong(ev, cfg, log, u"không tìm thấy clip để kiểm tra hướng")
     return xong
+
+
+def _the_hien_tren_man(ui, thu=4):
+    """Cac the clip dang hien + gio cua chung (cho anh thumbnail tai xong)."""
+    for _ in range(thu):
+        img = ui.shot()
+        the = [(c, read_clip_time(img, c)) for c in find_clip_cards(img)]
+        the = [(c, t) for c, t in the if t]
+        if the:
+            return the
+        time.sleep(1.8)
+    return []
+
+
+def quet_danh_sach_clip(ui, log=None, toi_da=80):
+    """Cuon het danh sach mot luot, ghi lai gio cua tat ca clip nhin thay."""
+    thay = set()
+    ui.scroll(-40)                     # ve dau danh sach
+    time.sleep(1.2)
+    khong_moi = 0
+    for _ in range(toi_da):
+        them = 0
+        for _c, t in _the_hien_tren_man(ui):
+            if t not in thay:
+                thay.add(t)
+                them += 1
+        khong_moi = 0 if them else khong_moi + 1
+        if khong_moi >= 3:
+            break
+        ui.scroll(4)
+    return thay
+
+
+def _khong_ro_huong(ev, cfg, log, ly_do):
+    """Xu ly su kien khong xac dinh duoc huong theo cau hinh."""
+    ev["huong"] = None
+    if cfg.get("huong_xe", "ca_hai") == "ca_hai":
+        return False
+    if cfg.get("giu_khi_khong_ro_huong", False):
+        return False
+    ev["bo_qua"] = ly_do
+    log(u"     ⏭ bỏ qua %s: %s" % (ev["thoi_gian"][11:], ly_do))
+    return True
+
+
+def _loc_huong(ev, cfg, huong, dx, log):
+    """True neu su kien bi loai vi khong dung huong. Ghi luon ket qua vao ev."""
+    ev["huong"] = huong
+    ev["dx"] = round(float(dx), 1)
+    mong_muon = cfg.get("huong_xe", "ca_hai")
+    if mong_muon == "ca_hai":
+        return False
+    if huong is None:
+        return _khong_ro_huong(ev, cfg, log,
+                               u"xe dịch ngang quá ít, không rõ ra hay vào mỏ")
+    if huong != mong_muon:
+        ev["bo_qua"] = u"xe đi %s" % TEN_HUONG.get(huong, huong)
+        log(u"     ⏭ bỏ qua: %s (lệch ngang %+.0f px)" % (ev["bo_qua"], dx))
+        return True
+    return False
