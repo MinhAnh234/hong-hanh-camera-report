@@ -1,5 +1,8 @@
 # App chụp ảnh xe & báo cáo HTML — Hong Hanh Company
 
+📊 **Xem báo cáo trực tuyến: https://minhanh234.github.io/hong-hanh-camera-report/**
+(mở được trên cả điện thoại)
+
 Ứng dụng Python làm việc với camera **Imou AOV PT-BE57** qua app Imou trên máy tính,
 xuất **báo cáo HTML** kèm ảnh và thống kê. App có **hai chế độ**:
 
@@ -145,3 +148,27 @@ python -m pip install "opencv-python==4.10.0.84" numpy mss pywin32 pillow winsdk
 
 Mô hình nhận dạng: **YOLOv4-tiny** (COCO) trong thư mục `models/` — chạy trên CPU,
 không cần GPU, không cần kết nối mạng khi chạy.
+
+## Chạy tự động & đồng bộ lên GitHub
+
+`TU_DONG_QUET.bat` làm 3 việc: quét sự kiện của hôm nay → sinh lại `index.html`
+→ `git push` lên GitHub. GitHub Pages tự cập nhật sau 1–2 phút.
+
+Đã tạo sẵn lịch trong Windows Task Scheduler, **chạy mỗi 3 tiếng**:
+
+```bat
+:: xem lịch
+schtasks /Query /TN "HongHanh - Quet camera moi 3 gio"
+
+:: đổi sang 6 tiếng/lần
+schtasks /Change /TN "HongHanh - Quet camera moi 3 gio" /RI 360
+
+:: tạm tắt / bật lại
+schtasks /Change /TN "HongHanh - Quet camera moi 3 gio" /DISABLE
+schtasks /Change /TN "HongHanh - Quet camera moi 3 gio" /ENABLE
+```
+
+Nhật ký mỗi lần chạy nằm trong `nhatky_tudong.txt` (không đẩy lên GitHub).
+
+**Điều kiện để lịch chạy được:** máy đang bật, đã đăng nhập Windows, app Imou đang mở.
+Trong lúc quét (~4–6 phút) app chiếm chuột và đưa cửa sổ Imou lên trên cùng.
