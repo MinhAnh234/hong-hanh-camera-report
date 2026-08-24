@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danh sách xe ghi nhận</title>
+<style>
+:root{
+  --bg:#f4f6fa; --card:#ffffff; --ink:#131722; --muted:#5b6577; --line:#e2e7f0;
+  --accent:#1f6feb; --ben:#f59e0b; --oto:#22a06b; --khach:#0ea5e9; --khac:#8b93a1;
+  --shadow:0 1px 3px rgba(16,24,40,.08),0 8px 24px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0e1116; --card:#161b22; --ink:#e6edf3; --muted:#9aa4b2; --line:#252c37;
+         --accent:#4b93ff; --shadow:0 1px 3px rgba(0,0,0,.5); }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:26px 18px 56px}
+h1{margin:0 0 4px;font-size:21px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{background:rgba(127,127,127,.07);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--muted);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.stt{width:56px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}
+td.gio{width:190px;font-family:Consolas,"Courier New",monospace;font-size:13px;white-space:nowrap}
+td.loai{width:170px}
+td.anh{width:220px}
+.uoc{color:var(--muted);cursor:help}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;
+  font-weight:700;color:#1b1b1b;background:var(--khac)}
+.pill.truck{background:var(--ben)} .pill.car{background:var(--oto);color:#fff}
+.pill.bus{background:var(--khach);color:#fff} .pill.vehicle{background:var(--accent);color:#fff}
+td.anh img{width:200px;height:112px;object-fit:cover;display:block;border-radius:8px;
+  background:#000;cursor:zoom-in;border:1px solid var(--line)}
+td.anh img:hover{outline:2px solid var(--accent);outline-offset:1px}
+.empty{padding:36px;text-align:center;color:var(--muted)}
+footer{margin-top:22px;color:var(--muted);font-size:12px;text-align:center}
+
+/* --- xem anh phong to --- */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;z-index:99;
+  overflow:hidden;touch-action:none}
+#lb.mo{display:block}
+#lbimg{position:absolute;top:50%;left:50%;transform-origin:center center;
+  will-change:transform;user-select:none;-webkit-user-drag:none;cursor:grab;
+  max-width:none;max-height:none}
+#lb.keo #lbimg{cursor:grabbing}
+#lbbar{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;
+  gap:6px;align-items:center;background:rgba(20,22,28,.9);border:1px solid #333a45;
+  padding:7px 10px;border-radius:999px;color:#e6edf3;font-size:13px;z-index:2}
+#lbbar button{background:#232833;color:#e6edf3;border:1px solid #39404d;width:32px;
+  height:32px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1}
+#lbbar button:hover{background:#2f3644}
+#lbbar .ty{min-width:52px;text-align:center;font-variant-numeric:tabular-nums}
+#lbbar .dong{width:auto;padding:0 12px;border-radius:16px}
+#lbcap{position:absolute;left:0;right:0;top:0;padding:14px 18px;color:#cbd5e1;
+  font-size:13px;background:linear-gradient(rgba(0,0,0,.65),transparent);z-index:2}
+@media print{
+  body{background:#fff}
+  .tablewrap{box-shadow:none}
+  #lb{display:none!important}
+  td.anh img{width:150px;height:84px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Danh sách xe ghi nhận</h1>
+  <div class="sub">AOV PT-BE57 – bản ghi 16:37:09 ngày 23-08-2026 &middot; 1 lượt &middot; ngày 23-08-2026</div>
+  <div class="tablewrap"><table><thead><tr><th>STT</th><th>Thời gian</th><th>Loại xe</th><th>Hình ảnh</th></tr></thead><tbody><tr><td class="stt">1</td><td class="gio">2026-08-23 23:38:01</td><td class="loai"><span class="pill truck">Xe ben / xe tải</span></td><td class="anh"><img loading="lazy" src="../captures/PHIEN-20260823-233751/001_truck_20260823-233801_danhdau.jpg" data-full="../captures/PHIEN-20260823-233751/001_truck_20260823-233801.jpg" data-chu="PHIEN-20260823-233751-001 · Xe ben / xe tải · 2026-08-23 23:38:01" alt="PHIEN-20260823-233751-001 · Xe ben / xe tải · 2026-08-23 23:38:01"></td></tr></tbody></table></div>
+  <footer>Phiên PHIEN-20260823-233751 · xuất lúc 24-08-2026 00:26</footer>
+</div>
+
+<div id="lb">
+  <div id="lbcap"></div>
+  <img id="lbimg" alt="">
+  <div id="lbbar">
+    <button type="button" data-act="out" title="Thu nhỏ">&minus;</button>
+    <span class="ty">100%</span>
+    <button type="button" data-act="in" title="Phóng to">+</button>
+    <button type="button" data-act="fit" title="Vừa màn hình">⤢</button>
+    <button type="button" data-act="close" class="dong" title="Đóng (Esc)">Đóng</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var lb = document.getElementById('lb'), im = document.getElementById('lbimg'),
+      cap = document.getElementById('lbcap'), bar = document.getElementById('lbbar'),
+      nhan = bar.querySelector('.ty');
+  var ty = 1, x = 0, y = 0, keo = false, x0 = 0, y0 = 0, vua = 1;
+
+  function ve(){
+    im.style.transform = 'translate(-50%,-50%) translate(' + x + 'px,' + y + 'px) scale(' + ty + ')';
+    nhan.textContent = Math.round(ty / vua * 100) + '%';
+  }
+  function fit(){
+    var kx = (window.innerWidth - 60) / im.naturalWidth,
+        ky = (window.innerHeight - 130) / im.naturalHeight;
+    vua = Math.min(kx, ky, 1) || 1;
+    ty = vua; x = 0; y = 0; ve();
+  }
+  function mo(src, chu){
+    im.src = src; cap.textContent = chu || '';
+    lb.classList.add('mo');
+    if (im.complete && im.naturalWidth) { fit(); } else { im.onload = fit; }
+  }
+  function dong(){ lb.classList.remove('mo'); im.src = ''; }
+
+  document.querySelectorAll('td.anh img').forEach(function(t){
+    t.addEventListener('click', function(){ mo(t.dataset.full || t.src, t.dataset.chu); });
+  });
+
+  lb.addEventListener('wheel', function(e){
+    e.preventDefault();
+    var truoc = ty;
+    ty = Math.min(vua * 12, Math.max(vua * 0.2, ty * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
+    // giu diem duoi con tro dung yen khi phong to
+    var cx = e.clientX - window.innerWidth / 2, cy = e.clientY - window.innerHeight / 2;
+    x = cx - (cx - x) * (ty / truoc);
+    y = cy - (cy - y) * (ty / truoc);
+    ve();
+  }, {passive:false});
+
+  im.addEventListener('pointerdown', function(e){
+    keo = true; x0 = e.clientX - x; y0 = e.clientY - y;
+    lb.classList.add('keo'); im.setPointerCapture(e.pointerId);
+  });
+  im.addEventListener('pointermove', function(e){
+    if (!keo) return;
+    x = e.clientX - x0; y = e.clientY - y0; ve();
+  });
+  im.addEventListener('pointerup', function(){ keo = false; lb.classList.remove('keo'); });
+  im.addEventListener('dblclick', function(){
+    ty = (ty > vua * 1.2) ? vua : vua * 2.5; x = 0; y = 0; ve();
+  });
+
+  bar.addEventListener('click', function(e){
+    var a = e.target.getAttribute('data-act');
+    if (!a) return;
+    if (a === 'in')  { ty = Math.min(vua * 12, ty * 1.3); ve(); }
+    if (a === 'out') { ty = Math.max(vua * 0.2, ty / 1.3); ve(); }
+    if (a === 'fit') { fit(); }
+    if (a === 'close') { dong(); }
+  });
+  lb.addEventListener('click', function(e){ if (e.target === lb) dong(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('mo')) return;
+    if (e.key === 'Escape') dong();
+    if (e.key === '+' || e.key === '=') { ty = Math.min(vua * 12, ty * 1.3); ve(); }
+    if (e.key === '-') { ty = Math.max(vua * 0.2, ty / 1.3); ve(); }
+    if (e.key === '0') fit();
+  });
+  window.addEventListener('resize', function(){ if (lb.classList.contains('mo')) fit(); });
+})();
+</script>
+</body>
+</html>

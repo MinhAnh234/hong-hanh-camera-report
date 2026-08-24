@@ -1,0 +1,44 @@
+{
+  "window_title": "Imou",
+  "camera_name": "AOV PT-BE57",
+  "capture_mode": "auto",
+  "roi": {
+    "left": 0.1906,
+    "top": 0.1124,
+    "right": 0.9971,
+    "bottom": 0.9212
+  },
+  "fps": 3.0,
+  "auto_focus_window": false,
+  "skip_when_occluded": true,
+  "motion_min_area_ratio": 0.0006,
+  "motion_min_region_side": 12,
+  "motion_var_threshold": 32,
+  "motion_history": 300,
+  "min_motion_in_box": 0.0,
+  "conf_threshold": 0.3,
+  "nms_threshold": 0.45,
+  "input_size": 320,
+  "scan_window_min": 380,
+  "scan_window_pad": 1.7,
+  "scan_max_regions": 8,
+  "refine_labels": true,
+  "refine_input_size": 608,
+  "classes_vi": {
+    "car": "Xe ô tô",
+    "truck": "Xe ben / xe tải",
+    "bus": "Xe khách",
+    "motorbike": "Xe máy",
+    "motorcycle": "Xe máy"
+  },
+  "watch_classes": [
+    "car",
+    "truck",
+    "bus"
+  ],
+  "track_min_hits": 2,
+  "track_min_move_px": 5,
+  "track_max_missing": 30,
+  "event_cooldown_sec": 3.0,
+  "save_annotated": true
+}

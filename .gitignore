@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# File tam
+*.tmp
+captures/**/events.json.tmp
+captures/_*.png
+
+# Cau hinh rieng cua tung may (vung chup phu thuoc kich thuoc cua so)
+# Bo dau # o dong duoi neu khong muon dong bo config giua cac may:
+# config.json
+
+nhatky_tudong.txt
