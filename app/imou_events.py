@@ -20,7 +20,7 @@ import numpy as np
 import win32con
 import win32gui
 
-from . import digits, ocr
+from . import digits, huy, ocr
 from .capture import WindowCapture, content_scale, enable_dpi_awareness
 
 user32 = ctypes.windll.user32
@@ -370,10 +370,12 @@ class ImouUI(object):
 
         khong_moi = 0
         for vong in range(max_scrolls + 1):
+            huy.kiem_tra()
             if img is None:
                 img = self.shot()
             them = 0
             for box in self.find_cards(img):
+                huy.kiem_tra()
                 ts, chac = self.read_card_time(img, box, dr=dr, ngay_biet=ngay_biet)
                 if not ts or ts in seen:
                     continue

@@ -60,63 +60,31 @@ def _run_headless(minutes, open_report):
 
 def _doc_su_kien_camera(ngay_str, open_report, anh_net=True):
     """Doc su kien 'phat hien phuong tien' ma camera Imou da tu ghi lai."""
-    from . import imou_events
+    from . import chay
 
-    cfg = config.load()
-    ngay = imou_events.ngay_tu_chuoi(ngay_str)
-    print(u"Camera: %s | ngày %s" % (cfg.get("camera_name", ""), ngay.strftime("%d-%m-%Y")))
-
-    events = imou_events.thu_thap(cfg, ngay=ngay)
-    if not events:
-        print(u"Không thấy sự kiện phương tiện nào trong ngày này.")
+    kq = chay.quet_su_kien(ngay_str, anh_net=anh_net, log=print)
+    if not kq["so_luot"]:
         return 1
-
-    if anh_net:
-        from . import clip_capture
-        print(u"Chụp lại ảnh nét từ clip ghi hình (%d sự kiện)…" % len(events))
+    print(u"Tổng cộng %d lượt xe ra khỏi mỏ." % kq["so_luot"])
+    if open_report and kq["bao_cao"]:
         try:
-            so = clip_capture.chup_anh_net(cfg, events)
-            print(u"Đã chụp nét %d/%d sự kiện." % (so, len(events)))
-        except Exception as e:
-            print(u"(!) Không chụp được ảnh nét: %s" % e)
+            os.startfile(kq["bao_cao"])
+        except Exception:
+            pass
+    return 0
 
-    bo = [e for e in events if e.get("bo_qua")]
-    if bo:
-        print(u"Bỏ qua %d lượt không đúng hướng cần theo dõi:" % len(bo))
-        for e in bo:
-            print(u"   - %s (%s)" % (e["thoi_gian"][11:], e["bo_qua"]))
-        events = [e for e in events if not e.get("bo_qua")]
-    if not events:
-        print(u"Không còn lượt nào sau khi lọc theo hướng.")
+
+def _duyet_clip(ngay_str, open_report):
+    """Duyet lan luot tung clip bang nut '>' trong cua so phat."""
+    from . import chay
+
+    kq = chay.duyet_clip(ngay_str, log=print)
+    if not kq["so_luot"]:
         return 1
-
-    sid = "SUKIEN-" + ngay.strftime("%Y%m%d")
-    sess = storage.Session(cfg, session_id=sid)
-    sess.meta["nguon"] = u"Sự kiện phát hiện phương tiện của camera Imou"
-    sess.meta["bat_dau"] = events[0]["thoi_gian"]
-    sess.meta["ket_thuc"] = events[-1]["thoi_gian"]
-    for e in events:
-        nhan = e.get("loai_xe_net")
-        ev = sess.add_camera_event(
-            e["thoi_gian"], e.get("anh_net") if e.get("anh_net") is not None else e["anh"],
-            loai_xe=nhan or "vehicle",
-            loai_xe_vi=cfg["classes_vi"].get(nhan, u"Phương tiện"),
-            chac_chan=e.get("chac_chan", True),
-            khung=e.get("khung_xe"), do_tin_cay=e.get("tin_cay"))
-        print(u"  + %s%s  %s" % (ev["thoi_gian"],
-                                 u"" if ev["thoi_gian_chac_chan"] else u"  (≈)",
-                                 ev["anh"]))
-    sess._flush()
-
-    print(u"Tổng cộng %d lượt xe %s."
-          % (len(events),
-             {"trai_sang_phai": u"đi trái → phải (ra khỏi mỏ)",
-              "phai_sang_trai": u"đi phải → trái"}.get(
-                  cfg.get("huong_xe", "ca_hai"), u"(mọi hướng)")))
-    web, _day_du = report.sinh_bao_cao(log=print)
-    if open_report:
+    print(u"Tổng cộng %d lượt xe ra khỏi mỏ." % kq["so_luot"])
+    if open_report and kq["bao_cao"]:
         try:
-            os.startfile(web)
+            os.startfile(kq["bao_cao"])
         except Exception:
             pass
     return 0
@@ -136,6 +104,8 @@ def main(argv=None):
                    help=u"ngay can lay: 23 | 23-08 | 2026-08-23 | hom-nay | hom-qua")
     p.add_argument("--khong-anh-net", action="store_true", dest="khong_anh_net",
                    help=u"bo qua buoc mo clip de chup anh net (nhanh hon, anh mo)")
+    p.add_argument("--duyet-clip", action="store_true", dest="duyet_clip",
+                   help=u"duyet lan luot tung clip bang nut '>' trong cua so phat")
     p.add_argument("--trang-chu", action="store_true", dest="trang_chu",
                    help=u"sinh lai bao cao gop (index.html + ban day du)")
     p.add_argument("--danh-sach", action="store_true", help=u"liet ke cac phien da co")
@@ -166,6 +136,9 @@ def main(argv=None):
             except Exception:
                 pass
         return 0
+
+    if args.duyet_clip:
+        return _duyet_clip(args.ngay, not args.khong_mo)
 
     if args.su_kien:
         return _doc_su_kien_camera(args.ngay, not args.khong_mo, not args.khong_anh_net)

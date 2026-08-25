@@ -17,7 +17,7 @@ import win32api
 import win32con
 import win32gui
 
-from . import ocr
+from . import huy, ocr
 from .capture import detect_video_rect, list_windows, print_window
 from .imou_events import ImouUI
 
@@ -189,6 +189,7 @@ def chup_tu_player(hwnd, detector, cfg=None, so_khung=16, moi_khung=0.8,
     tot_anh, tot_det, tot_diem = None, None, -1.0
     du_phong, truoc, dung_yen = None, None, 0
     for i in range(so_khung):
+        huy.kiem_tra()
         anh = print_window(hwnd)
         if anh is not None:
             if truoc is not None and anh.shape == truoc.shape:
@@ -432,6 +433,7 @@ def quet_danh_sach_clip(ui, log=None, toi_da=70):
     len_dau_danh_sach(ui)              # ve dau danh sach
     truoc, giong = None, 0
     for _ in range(toi_da):
+        huy.kiem_tra()
         hien = set(t for _c, t in _the_hien_tren_man(ui))
         thay |= hien
         giong = giong + 1 if (hien and hien == truoc) else 0
