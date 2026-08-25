@@ -117,6 +117,37 @@ def _giay(hms):
     return g * 3600 + p * 60 + s
 
 
+def mo_clip_cu_hon(ui, gio_moc, log=print, so_lan_cuon=40):
+    """Quay lai danh sach, cuon xuong tim clip CU HON `gio_moc` roi mo no.
+
+    Danh sach clip tai dan (lazy load) nen nut '>' chi di duoc trong pham vi
+    giao dien da tai san - het pham vi do la nut khong doi clip nua du danh sach
+    con rat nhieu. Luc do phai cuon cho tai them roi mo tay clip ke tiep.
+
+    Tra ve hwnd cua so phat, hoac None neu that su het clip.
+    """
+    moc = _giay(gio_moc)
+    for _ in range(so_lan_cuon):
+        huy.kiem_tra()
+        img = ui.shot()
+        ung_vien = []
+        for c in find_clip_cards(img):
+            t = read_clip_time(img, c)
+            if t and _giay(t) < moc:
+                ung_vien.append((_giay(t), t, c))
+        if ung_vien:
+            _g, t, card = max(ung_vien)        # clip cu hon nhung gan moc nhat
+            xa, ya, xb, yb = card
+            ui.click((xa + xb) // 2, (ya + yb) // 2, double=True, settle=2.0)
+            h = _cho_player()
+            if h is not None:
+                log(u"  … cuộn danh sách, mở tiếp clip %s" % t)
+                return h
+        ui.scroll(4)
+        time.sleep(0.8)
+    return None
+
+
 def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
     """Duyet cac clip cua `ngay` tu moi den cu.
 
@@ -172,8 +203,18 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
 
         moi = sang_clip_ke_tiep(hwnd, gio)
         if moi is None:
-            log(u"  hết clip (hoặc không bấm được nút ›).")
-            break
+            # Het pham vi clip da tai -> ve danh sach, cuon them roi mo tiep.
+            _close_player()
+            h = mo_clip_cu_hon(ui, gio, log)
+            if h is None:
+                log(u"  hết clip.")
+                break
+            hwnd = h
+            ImouUI.dua_len_tren(hwnd, True)
+            moi = doc_gio_clip(hwnd)
+            if moi is None or _giay(moi) >= _giay(gio):
+                log(u"  hết clip (không tìm được clip cũ hơn %s)." % gio)
+                break
         gio = moi
 
     _close_player()

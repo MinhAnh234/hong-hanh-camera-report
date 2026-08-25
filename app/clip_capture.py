@@ -233,17 +233,43 @@ def _giay(hms):
     return h * 3600 + m * 60 + s
 
 
+VUNG_TAB_BAN_GHI = (160, 235, 265, 950)      # (y1, y2, x1, x2) trong cua so Imou
+
+
+def _tim_tab_noi_bo(img):
+    """Tim dong chu 'Ban ghi noi bo' trong dai tab.
+
+    Tab CHUA duoc chon co chu xam nhat tren nen cam nhat nen bo OCR cua Windows
+    thuong bo qua han. Nhi phan hoa Otsu roi phong to 4 lan thi doc duoc.
+    Tra ve (Line, x1, y1) hoac None.
+    """
+    y1, y2, x1, x2 = VUNG_TAB_BAN_GHI
+    vung = img[y1:y2, x1:x2]
+    if vung.size == 0:
+        return None
+    xam = cv2.cvtColor(vung, cv2.COLOR_BGR2GRAY)
+    otsu = cv2.threshold(xam, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+    thich_nghi = cv2.adaptiveThreshold(xam, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
+                                       cv2.THRESH_BINARY, 31, 10)
+    for anh, scale in ((cv2.cvtColor(otsu, cv2.COLOR_GRAY2BGR), 4.0),
+                       (vung, 2.2),
+                       (cv2.cvtColor(thich_nghi, cv2.COLOR_GRAY2BGR), 4.0)):
+        hit = ocr.find_line(ocr.read(anh, scale=scale), u"noi", u"bo")
+        if hit is not None:
+            return hit, x1, y1
+    return None
+
+
 def chon_tab_ban_ghi(ui, log=None):
     """Bam vao tab 'Ban ghi noi bo' (app vua mo thuong dang o 'Ban ghi dam may')."""
     noi = log or (lambda *_a: None)
-    img = ui.shot()
-    lines = ocr.read(img[160:235, 265:950], scale=2.2)
-    hit = ocr.find_line(lines, u"noi", u"bo")
-    if hit is None:
+    tim = _tim_tab_noi_bo(ui.shot())
+    if tim is None:
         noi(u"  (!) Không thấy tab 'Bản ghi nội bộ' – dùng tab đang mở.")
         return False
+    hit, x1, y1 = tim
     cx, cy = hit.center
-    ui.click(cx + 265, cy + 160, settle=2.5)
+    ui.click(cx + x1, cy + y1, settle=2.5)
     return True
 
 
