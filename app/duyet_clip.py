@@ -117,6 +117,20 @@ def _giay(hms):
     return g * 3600 + p * 60 + s
 
 
+def la_anh_ban_dem(anh, nguong_bao_hoa=25):
+    """Anh co phai chup o che do BAN DEM (hong ngoai) khong.
+
+    Ban dem camera tat loc mau va bat den hong ngoai nen anh gan nhu don sac:
+    do bao hoa mau trung binh tut ve gan 0, trong khi anh ban ngay luon tren 40.
+    Dua vao chinh anh chac chan hon la chia theo khung gio co dinh, vi gio troi
+    sang/toi thay doi theo mua.
+    """
+    if anh is None or anh.size == 0:
+        return False
+    hsv = cv2.cvtColor(anh, cv2.COLOR_BGR2HSV)
+    return float(hsv[:, :, 1].mean()) < float(nguong_bao_hoa)
+
+
 def mo_clip_cu_hon(ui, gio_moc, log=print, so_lan_cuon=40):
     """Quay lai danh sach, cuon xuong tim clip CU HON `gio_moc` roi mo no.
 
@@ -185,8 +199,14 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
         anh, det, huong, dx = chup_tu_player(hwnd, detector, cfg,
                                              so_khung=14, moi_khung=0.8,
                                              cho_toi_da=10.0)
+        nguong_dem = float(cfg.get("nguong_tin_cay_ban_dem", 0.5))
         if det is None:
             log(u"  %s  – không thấy xe" % gio)
+        elif (nguong_dem > 0
+              and la_anh_ban_dem(anh, cfg.get("nguong_bao_hoa_dem", 25))
+              and (nguong_dem >= 1.0 or det.conf < nguong_dem)):
+            log(u"  %s  – %s %.0f%%, ảnh ban đêm tin cậy thấp – bỏ"
+                % (gio, det.label, det.conf * 100))
         elif mong_muon != "ca_hai" and huong != mong_muon:
             log(u"  %s  – %s, bỏ (%s)"
                 % (gio, det.label, TEN_HUONG.get(huong, u"chưa rõ hướng")))

@@ -2,89 +2,11 @@
   "phien": {
     "ma_phien": "SUKIEN-20260825",
     "camera": "AOV PT-BE57",
-    "bat_dau": "2026-08-25 02:02:37",
-    "ket_thuc": "2026-08-25 21:19:49",
+    "bat_dau": "2026-08-25 06:02:46",
+    "ket_thuc": "2026-08-25 16:49:10",
     "nguon": "Sự kiện phát hiện phương tiện của camera Imou"
   },
   "su_kien": [
-    {
-      "ma_luot": "SUKIEN-20260825-001",
-      "stt": 1,
-      "thoi_gian": "2026-08-25 02:02:37",
-      "gio": 2,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.334,
-      "khung": [
-        0,
-        362,
-        138,
-        118
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "001_car_20260825-020237.jpg",
-      "anh_danh_dau": "001_car_20260825-020237_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-002",
-      "stt": 2,
-      "thoi_gian": "2026-08-25 02:32:38",
-      "gio": 2,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.472,
-      "khung": [
-        0,
-        427,
-        133,
-        57
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "002_car_20260825-023238.jpg",
-      "anh_danh_dau": "002_car_20260825-023238_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-003",
-      "stt": 3,
-      "thoi_gian": "2026-08-25 04:02:41",
-      "gio": 4,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.481,
-      "khung": [
-        932,
-        476,
-        40,
-        30
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1522,
-        848
-      ],
-      "anh": "003_car_20260825-040241.jpg",
-      "anh_danh_dau": "003_car_20260825-040241_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
     {
       "ma_luot": "SUKIEN-20260825-004",
       "stt": 4,
@@ -1589,84 +1511,6 @@
       ],
       "anh": "061_bus_20260825-164910.jpg",
       "anh_danh_dau": "061_bus_20260825-164910_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-062",
-      "stt": 62,
-      "thoi_gian": "2026-08-25 19:49:46",
-      "gio": 19,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.36,
-      "khung": [
-        546,
-        208,
-        40,
-        25
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "062_car_20260825-194946.jpg",
-      "anh_danh_dau": "062_car_20260825-194946_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-063",
-      "stt": 63,
-      "thoi_gian": "2026-08-25 20:19:47",
-      "gio": 20,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.539,
-      "khung": [
-        488,
-        206,
-        48,
-        35
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1492,
-        848
-      ],
-      "anh": "063_car_20260825-201947.jpg",
-      "anh_danh_dau": "063_car_20260825-201947_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-064",
-      "stt": 64,
-      "thoi_gian": "2026-08-25 21:19:49",
-      "gio": 21,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.403,
-      "khung": [
-        540,
-        208,
-        47,
-        24
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "064_car_20260825-211949.jpg",
-      "anh_danh_dau": "064_car_20260825-211949_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
       "ghi_chu": ""

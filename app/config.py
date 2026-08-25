@@ -61,6 +61,15 @@ DEFAULTS = {
     "huong_min_dx": 25,               # so diem anh toi thieu theo truc ngang de ket luan
     "giu_khi_khong_ro_huong": True,   # khong ro huong van GIU (khong bo sot luot nao)
 
+    # --- Loc bot nhan dang sai vao BAN DEM ---
+    # Ban dem camera chuyen sang hong ngoai: anh mat mau han (do bao hoa ~ 0) va
+    # mo hinh hay nham bong den / vet sang thanh xe. Chi ban dem moi ap dung
+    # nguong tin cay cao hon; ban ngay giu nguyen tat ca.
+    "nguong_bao_hoa_dem": 25,         # do bao hoa mau TB duoi muc nay = anh hong ngoai
+    # 1.0 = BO HET moi luot ban dem (anh hong ngoai qua nhieu, mo hinh hay nham
+    # bong den / vet sang thanh xe); 0 = tat bo loc; 0..1 = nguong tin cay.
+    "nguong_tin_cay_ban_dem": 1.0,
+
     # --- Bam vet & luu su kien ---
     "track_min_hits": 2,              # so lan thay lien tiep truoc khi xac nhan
     "track_min_move_px": 5,          # quang duong toi thieu de coi la "dang chuyen dong"
