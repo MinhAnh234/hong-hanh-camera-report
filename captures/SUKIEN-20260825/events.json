@@ -2,89 +2,11 @@
   "phien": {
     "ma_phien": "SUKIEN-20260825",
     "camera": "AOV PT-BE57",
-    "bat_dau": "2026-08-25 06:02:46",
+    "bat_dau": "2026-08-25 07:03:33",
     "ket_thuc": "2026-08-25 16:49:10",
     "nguon": "Sự kiện phát hiện phương tiện của camera Imou"
   },
   "su_kien": [
-    {
-      "ma_luot": "SUKIEN-20260825-004",
-      "stt": 4,
-      "thoi_gian": "2026-08-25 06:02:46",
-      "gio": 6,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.308,
-      "khung": [
-        153,
-        680,
-        51,
-        23
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "004_car_20260825-060246.jpg",
-      "anh_danh_dau": "004_car_20260825-060246_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-005",
-      "stt": 5,
-      "thoi_gian": "2026-08-25 06:27:47",
-      "gio": 6,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.301,
-      "khung": [
-        460,
-        212,
-        52,
-        27
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "005_truck_20260825-062747.jpg",
-      "anh_danh_dau": "005_truck_20260825-062747_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-006",
-      "stt": 6,
-      "thoi_gian": "2026-08-25 06:57:48",
-      "gio": 6,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.601,
-      "khung": [
-        457,
-        211,
-        57,
-        28
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "006_truck_20260825-065748.jpg",
-      "anh_danh_dau": "006_truck_20260825-065748_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
     {
       "ma_luot": "SUKIEN-20260825-007",
       "stt": 7,
@@ -109,85 +31,8 @@
       "anh_danh_dau": "007_truck_20260825-070333_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-008",
-      "stt": 8,
-      "thoi_gian": "2026-08-25 07:03:48",
-      "gio": 7,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.498,
-      "khung": [
-        462,
-        214,
-        50,
-        27
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "008_truck_20260825-070348.jpg",
-      "anh_danh_dau": "008_truck_20260825-070348_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-009",
-      "stt": 9,
-      "thoi_gian": "2026-08-25 07:33:50",
-      "gio": 7,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.412,
-      "khung": [
-        462,
-        214,
-        52,
-        27
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "009_truck_20260825-073350.jpg",
-      "anh_danh_dau": "009_truck_20260825-073350_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-010",
-      "stt": 10,
-      "thoi_gian": "2026-08-25 08:03:51",
-      "gio": 8,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.525,
-      "khung": [
-        154,
-        682,
-        50,
-        21
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "010_car_20260825-080351.jpg",
-      "anh_danh_dau": "010_car_20260825-080351_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-011",
@@ -213,33 +58,8 @@
       "anh_danh_dau": "011_truck_20260825-081125_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-012",
-      "stt": 12,
-      "thoi_gian": "2026-08-25 08:11:59",
-      "gio": 8,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.612,
-      "khung": [
-        631,
-        247,
-        39,
-        31
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "012_truck_20260825-081159.jpg",
-      "anh_danh_dau": "012_truck_20260825-081159_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-013",
@@ -265,33 +85,8 @@
       "anh_danh_dau": "013_truck_20260825-082324_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-014",
-      "stt": 14,
-      "thoi_gian": "2026-08-25 08:23:54",
-      "gio": 8,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.489,
-      "khung": [
-        435,
-        263,
-        89,
-        32
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "014_truck_20260825-082354.jpg",
-      "anh_danh_dau": "014_truck_20260825-082354_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-015",
@@ -317,33 +112,8 @@
       "anh_danh_dau": "015_truck_20260825-084014_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-016",
-      "stt": 16,
-      "thoi_gian": "2026-08-25 08:40:43",
-      "gio": 8,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.415,
-      "khung": [
-        1095,
-        367,
-        160,
-        63
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "016_truck_20260825-084043.jpg",
-      "anh_danh_dau": "016_truck_20260825-084043_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-017",
@@ -369,7 +139,8 @@
       "anh_danh_dau": "017_truck_20260825-084641_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-018",
@@ -395,33 +166,8 @@
       "anh_danh_dau": "018_truck_20260825-084757_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-019",
-      "stt": 19,
-      "thoi_gian": "2026-08-25 08:48:27",
-      "gio": 8,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.731,
-      "khung": [
-        615,
-        248,
-        70,
-        29
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "019_truck_20260825-084827.jpg",
-      "anh_danh_dau": "019_truck_20260825-084827_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-020",
@@ -447,59 +193,8 @@
       "anh_danh_dau": "020_truck_20260825-085654_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-021",
-      "stt": 21,
-      "thoi_gian": "2026-08-25 08:57:00",
-      "gio": 8,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.843,
-      "khung": [
-        639,
-        285,
-        45,
-        49
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "021_car_20260825-085700.jpg",
-      "anh_danh_dau": "021_car_20260825-085700_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-022",
-      "stt": 22,
-      "thoi_gian": "2026-08-25 08:57:05",
-      "gio": 8,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.921,
-      "khung": [
-        948,
-        343,
-        205,
-        93
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "022_truck_20260825-085705.jpg",
-      "anh_danh_dau": "022_truck_20260825-085705_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": null
     },
     {
       "ma_luot": "SUKIEN-20260825-023",
@@ -525,33 +220,8 @@
       "anh_danh_dau": "023_truck_20260825-092348_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-024",
-      "stt": 24,
-      "thoi_gian": "2026-08-25 09:24:18",
-      "gio": 9,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.635,
-      "khung": [
-        636,
-        245,
-        74,
-        30
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "024_truck_20260825-092418.jpg",
-      "anh_danh_dau": "024_truck_20260825-092418_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-025",
@@ -577,33 +247,8 @@
       "anh_danh_dau": "025_truck_20260825-093632_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-026",
-      "stt": 26,
-      "thoi_gian": "2026-08-25 09:37:02",
-      "gio": 9,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.45,
-      "khung": [
-        144,
-        803,
-        331,
-        43
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "026_car_20260825-093702.jpg",
-      "anh_danh_dau": "026_car_20260825-093702_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-027",
@@ -629,33 +274,8 @@
       "anh_danh_dau": "027_truck_20260825-100701_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-028",
-      "stt": 28,
-      "thoi_gian": "2026-08-25 10:07:34",
-      "gio": 10,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.71,
-      "khung": [
-        619,
-        248,
-        77,
-        31
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "028_truck_20260825-100734.jpg",
-      "anh_danh_dau": "028_truck_20260825-100734_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-029",
@@ -681,7 +301,8 @@
       "anh_danh_dau": "029_truck_20260825-101450_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-030",
@@ -707,59 +328,8 @@
       "anh_danh_dau": "030_truck_20260825-103724_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-031",
-      "stt": 31,
-      "thoi_gian": "2026-08-25 10:37:54",
-      "gio": 10,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.935,
-      "khung": [
-        1030,
-        354,
-        157,
-        82
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "031_truck_20260825-103754.jpg",
-      "anh_danh_dau": "031_truck_20260825-103754_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-032",
-      "stt": 32,
-      "thoi_gian": "2026-08-25 10:46:53",
-      "gio": 10,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.909,
-      "khung": [
-        673,
-        267,
-        37,
-        39
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "032_truck_20260825-104653.jpg",
-      "anh_danh_dau": "032_truck_20260825-104653_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-033",
@@ -785,7 +355,8 @@
       "anh_danh_dau": "033_truck_20260825-104705_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-034",
@@ -811,7 +382,8 @@
       "anh_danh_dau": "034_truck_20260825-115417_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-035",
@@ -837,33 +409,8 @@
       "anh_danh_dau": "035_truck_20260825-131832_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-036",
-      "stt": 36,
-      "thoi_gian": "2026-08-25 13:19:02",
-      "gio": 13,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.894,
-      "khung": [
-        674,
-        251,
-        36,
-        43
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "036_truck_20260825-131902.jpg",
-      "anh_danh_dau": "036_truck_20260825-131902_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-037",
@@ -889,7 +436,8 @@
       "anh_danh_dau": "037_truck_20260825-132621_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-038",
@@ -915,33 +463,8 @@
       "anh_danh_dau": "038_truck_20260825-135042_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-039",
-      "stt": 39,
-      "thoi_gian": "2026-08-25 13:51:00",
-      "gio": 13,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.566,
-      "khung": [
-        550,
-        262,
-        90,
-        46
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "039_truck_20260825-135100.jpg",
-      "anh_danh_dau": "039_truck_20260825-135100_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-040",
@@ -967,7 +490,8 @@
       "anh_danh_dau": "040_truck_20260825-135951_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-041",
@@ -993,59 +517,8 @@
       "anh_danh_dau": "041_truck_20260825-141759_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-042",
-      "stt": 42,
-      "thoi_gian": "2026-08-25 14:18:29",
-      "gio": 14,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.753,
-      "khung": [
-        644,
-        268,
-        38,
-        42
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "042_truck_20260825-141829.jpg",
-      "anh_danh_dau": "042_truck_20260825-141829_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-043",
-      "stt": 43,
-      "thoi_gian": "2026-08-25 14:18:36",
-      "gio": 14,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.548,
-      "khung": [
-        703,
-        242,
-        57,
-        34
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "043_truck_20260825-141836.jpg",
-      "anh_danh_dau": "043_truck_20260825-141836_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-044",
@@ -1071,7 +544,8 @@
       "anh_danh_dau": "044_truck_20260825-142912_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-045",
@@ -1097,7 +571,8 @@
       "anh_danh_dau": "045_truck_20260825-143242_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-046",
@@ -1123,7 +598,8 @@
       "anh_danh_dau": "046_truck_20260825-143933_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-047",
@@ -1149,33 +625,8 @@
       "anh_danh_dau": "047_truck_20260825-150118_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-048",
-      "stt": 48,
-      "thoi_gian": "2026-08-25 15:01:26",
-      "gio": 15,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.9,
-      "khung": [
-        732,
-        310,
-        110,
-        69
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "048_truck_20260825-150126.jpg",
-      "anh_danh_dau": "048_truck_20260825-150126_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": null
     },
     {
       "ma_luot": "SUKIEN-20260825-049",
@@ -1201,7 +652,8 @@
       "anh_danh_dau": "049_truck_20260825-151338_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-050",
@@ -1227,33 +679,8 @@
       "anh_danh_dau": "050_truck_20260825-153126_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-051",
-      "stt": 51,
-      "thoi_gian": "2026-08-25 15:31:54",
-      "gio": 15,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.4,
-      "khung": [
-        566,
-        239,
-        77,
-        31
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "051_car_20260825-153154.jpg",
-      "anh_danh_dau": "051_car_20260825-153154_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-052",
@@ -1279,33 +706,8 @@
       "anh_danh_dau": "052_truck_20260825-153857_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-053",
-      "stt": 53,
-      "thoi_gian": "2026-08-25 15:39:25",
-      "gio": 15,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.331,
-      "khung": [
-        1143,
-        364,
-        156,
-        59
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "053_truck_20260825-153925.jpg",
-      "anh_danh_dau": "053_truck_20260825-153925_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-054",
@@ -1331,59 +733,8 @@
       "anh_danh_dau": "054_truck_20260825-163519_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-055",
-      "stt": 55,
-      "thoi_gian": "2026-08-25 16:35:49",
-      "gio": 16,
-      "loai_xe": "car",
-      "loai_xe_vi": "Xe ô tô",
-      "do_tin_cay": 0.771,
-      "khung": [
-        674,
-        252,
-        42,
-        43
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "055_car_20260825-163549.jpg",
-      "anh_danh_dau": "055_car_20260825-163549_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-056",
-      "stt": 56,
-      "thoi_gian": "2026-08-25 16:36:00",
-      "gio": 16,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.666,
-      "khung": [
-        657,
-        246,
-        75,
-        31
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "056_truck_20260825-163600.jpg",
-      "anh_danh_dau": "056_truck_20260825-163600_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-057",
@@ -1409,33 +760,8 @@
       "anh_danh_dau": "057_truck_20260825-163928_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-058",
-      "stt": 58,
-      "thoi_gian": "2026-08-25 16:39:55",
-      "gio": 16,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.488,
-      "khung": [
-        542,
-        236,
-        71,
-        32
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "058_truck_20260825-163955.jpg",
-      "anh_danh_dau": "058_truck_20260825-163955_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "phai_sang_trai"
     },
     {
       "ma_luot": "SUKIEN-20260825-059",
@@ -1461,33 +787,8 @@
       "anh_danh_dau": "059_truck_20260825-164454_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
-      "ma_luot": "SUKIEN-20260825-060",
-      "stt": 60,
-      "thoi_gian": "2026-08-25 16:45:24",
-      "gio": 16,
-      "loai_xe": "truck",
-      "loai_xe_vi": "Xe ben / xe tải",
-      "do_tin_cay": 0.499,
-      "khung": [
-        379,
-        238,
-        130,
-        62
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "060_truck_20260825-164524.jpg",
-      "anh_danh_dau": "060_truck_20260825-164524_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     },
     {
       "ma_luot": "SUKIEN-20260825-061",
@@ -1513,7 +814,8 @@
       "anh_danh_dau": "061_bus_20260825-164910_danhdau.jpg",
       "nguon_su_kien": "Camera tự phát hiện",
       "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
+      "ghi_chu": "",
+      "huong": "trai_sang_phai"
     }
   ]
 }

@@ -65,6 +65,7 @@ def duyet_clip(ngay_str="", log=print):
         return {"ngay": ngay, "so_luot": 0, "so_bo": 0, "bao_cao": None}
 
     events.sort(key=lambda e: e["thoi_gian"])
+    events = dc.gop_luot_trung(events, int(cfg.get("gop_luot_cach_nhau_giay", 45)), log)
     _luu(cfg, ngay, events, log)
     web, _ = report.sinh_bao_cao(log=log)
     return {"ngay": ngay, "so_luot": len(events), "so_bo": 0, "bao_cao": web}
@@ -86,7 +87,8 @@ def _luu(cfg, ngay, events, log):
             loai_xe=nhan or "vehicle",
             loai_xe_vi=cfg["classes_vi"].get(nhan, u"Phương tiện"),
             chac_chan=e.get("chac_chan", True),
-            khung=e.get("khung_xe"), do_tin_cay=e.get("tin_cay"))
+            khung=e.get("khung_xe"), do_tin_cay=e.get("tin_cay"),
+            huong=e.get("huong"), dx=e.get("dx"))
         log(u"  + %s  %s" % (ev["thoi_gian"], ev["anh"]))
     sess._flush()
 

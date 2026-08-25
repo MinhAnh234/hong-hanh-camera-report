@@ -44,6 +44,8 @@
   "giu_khi_khong_ro_huong": true,
   "nguong_bao_hoa_dem": 25,
   "nguong_tin_cay_ban_dem": 1.0,
+  "nguong_tin_cay_khong_ro_huong": 0.7,
+  "gop_luot_cach_nhau_giay": 45,
   "track_min_hits": 2,
   "track_min_move_px": 5,
   "track_max_missing": 30,

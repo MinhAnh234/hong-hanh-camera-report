@@ -70,6 +70,20 @@ DEFAULTS = {
     # bong den / vet sang thanh xe); 0 = tat bo loc; 0..1 = nguong tin cay.
     "nguong_tin_cay_ban_dem": 1.0,
 
+    # --- Loc luot KHONG DICH CHUYEN ---
+    # Xe that chay qua thi phai dich ngang; vat dung yen (may xuc, container,
+    # thung xe do ben duong) khong dich chuyen nen bi ghi la "chua ro huong".
+    # Kiem tra tay ngay 25/8: nhom nay duoi 60% deu la nham, tu 75% tro len deu
+    # la xe that - nguong 0.70 nam gon trong khoang trong giua hai nhom.
+    "nguong_tin_cay_khong_ro_huong": 0.70,
+
+    # --- Gop luot bi dem trung ---
+    # Camera cat clip thanh tung doan ~30 giay. Mot chiec xe chay qua dung luc
+    # giao giua hai clip se hien ra o CUOI clip nay va DAU clip kia -> bi ghi
+    # thanh hai luot cach nhau dung 30 giay. Gop cac luot sat nhau lai lam mot,
+    # giu luot co do tin cay cao nhat. 0 = tat.
+    "gop_luot_cach_nhau_giay": 45,
+
     # --- Bam vet & luu su kien ---
     "track_min_hits": 2,              # so lan thay lien tiep truoc khi xac nhan
     "track_min_move_px": 5,          # quang duong toi thieu de coi la "dang chuyen dong"

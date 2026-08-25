@@ -132,7 +132,7 @@ class Session(object):
     # ---- su kien lay tu camera (Imou tu phat hien) ----
     def add_camera_event(self, thoi_gian, image, loai_xe="vehicle",
                          loai_xe_vi=u"Phương tiện", note=u"", chac_chan=True,
-                         khung=None, do_tin_cay=None):
+                         khung=None, do_tin_cay=None, huong=None, dx=None):
         """Luu mot su kien do CHINH CAMERA phat hien (anh + moc thoi gian)."""
         self.seq += 1
         ts = datetime.strptime(thoi_gian, "%Y-%m-%d %H:%M:%S")
@@ -162,6 +162,8 @@ class Session(object):
             "loai_xe_vi": loai_xe_vi,
             "do_tin_cay": do_tin_cay,
             "khung": list(khung) if khung else None,
+            "huong": huong,
+            "dx": dx,
             "quang_duong_px": None,
             "so_khung_hinh": None,
             "kich_thuoc_anh": [int(w), int(h)],

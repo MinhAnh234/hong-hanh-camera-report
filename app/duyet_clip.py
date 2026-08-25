@@ -162,6 +162,43 @@ def mo_clip_cu_hon(ui, gio_moc, log=print, so_lan_cuon=40):
     return None
 
 
+def gop_luot_trung(events, khoang, log=print):
+    """Gop cac luot sat nhau (cung mot xe bi cat lam doi giua hai clip).
+
+    `events` phai da sap xep theo thoi gian tang dan. Trong moi nhom giu lai
+    luot co do tin cay cao nhat - do thuong la khung hinh xe vao giua khung.
+    KHONG gop hai luot da xac dinh duoc huong ma NGUOC nhau: do chac chan la
+    hai chiec xe khac nhau di nguoc chieu.
+    """
+    if khoang <= 0 or len(events) < 2:
+        return events
+
+    def giay(e):
+        h, p, s = (int(v) for v in e["thoi_gian"][11:].split(":"))
+        return h * 3600 + p * 60 + s
+
+    giu, bo, i = [], [], 0
+    while i < len(events):
+        nhom, j = [events[i]], i + 1
+        while j < len(events):
+            if giay(events[j]) - giay(nhom[-1]) > khoang:
+                break
+            ha, hb = nhom[-1].get("huong"), events[j].get("huong")
+            if ha and hb and ha != hb:      # hai xe di nguoc chieu
+                break
+            nhom.append(events[j])
+            j += 1
+        tot = max(nhom, key=lambda e: e.get("tin_cay") or e.get("do_tin_cay") or 0)
+        giu.append(tot)
+        bo.extend(e for e in nhom if e is not tot)
+        i = j
+    if bo:
+        log(u"• Gộp %d lượt trùng (cùng xe bị cắt làm đôi giữa hai clip)." % len(bo))
+        for e in bo:
+            log(u"    ↳ bỏ %s" % e["thoi_gian"][11:])
+    return giu
+
+
 def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
     """Duyet cac clip cua `ngay` tu moi den cu.
 
@@ -206,6 +243,10 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
               and la_anh_ban_dem(anh, cfg.get("nguong_bao_hoa_dem", 25))
               and (nguong_dem >= 1.0 or det.conf < nguong_dem)):
             log(u"  %s  – %s %.0f%%, ảnh ban đêm tin cậy thấp – bỏ"
+                % (gio, det.label, det.conf * 100))
+        elif (huong is None
+              and det.conf < float(cfg.get("nguong_tin_cay_khong_ro_huong", 0.70))):
+            log(u"  %s  – %s %.0f%%, không dịch chuyển và nhận dạng yếu – bỏ"
                 % (gio, det.label, det.conf * 100))
         elif mong_muon != "ca_hai" and huong != mong_muon:
             log(u"  %s  – %s, bỏ (%s)"
