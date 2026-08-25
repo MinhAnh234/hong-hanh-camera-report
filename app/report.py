@@ -446,7 +446,7 @@ def build_all(out_path=None, gioi_han_ngay=None):
 
     out = TEMPLATE
     for k, v in {
-        "__TIEUDE__": _esc(u"Danh sách xe ra khỏi mỏ"),
+        "__TIEUDE__": _esc(u"Danh sách xe ra vào mỏ"),
         "__PHUDE__": phude,
         "__BANG__": _bang(events),
         "__CHON_LOAI__": _chon_loai(events),

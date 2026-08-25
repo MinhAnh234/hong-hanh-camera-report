@@ -72,27 +72,24 @@ sự kiện 15:43:16 ──khớp──► clip 15:43:15 ──phát──► ch
 Nhờ vậy báo cáo còn biết luôn **loại xe** (xe ben / xe ô tô) chứ không chỉ "Phương tiện".
 Muốn bỏ bước này cho nhanh thì thêm `--khong-anh-net` (ảnh sẽ mờ).
 
-### Chỉ lấy xe ra khỏi mỏ (đi từ trái qua phải)
+### Ghi nhận mọi lượt xe, không phân biệt hướng
 
-Trong lúc phát clip, app bám vết chiếc xe qua nhiều khung hình để biết nó đi
-**trái → phải** (ra khỏi mỏ) hay **phải → trái** (vào mỏ). Chỉ lượt ra khỏi mỏ
-mới được đưa vào báo cáo:
+Báo cáo lấy **tất cả** xe camera bắt được, dù đi **trái → phải** (ra khỏi mỏ)
+hay **phải → trái** (vào mỏ). App vẫn bám vết để biết hướng, nhưng chỉ dùng làm
+ghi chú chứ không loại bỏ lượt nào:
 
 ```
 15:17:07  ← clip 15:17:07   ✔ xe ben 86% – hướng trái → phải (ra khỏi mỏ)
-14:57:00  ← clip 14:56:58   ⏭ bỏ qua: xe đi phải → trái (lệch ngang -164 px)
+14:57:00  ← clip 14:56:58   ✔ xe ben 91% – hướng phải → trái (vào mỏ)
 ```
 
-Chỉnh trong `config.json`:
+Nếu sau này muốn lọc lại theo một hướng, chỉnh trong `config.json`:
 
 | Khoá | Ý nghĩa | Mặc định |
 |---|---|---|
-| `huong_xe` | `trai_sang_phai` / `phai_sang_trai` / `ca_hai` | `trai_sang_phai` |
+| `huong_xe` | `ca_hai` = lấy tất cả. Đổi thành `trai_sang_phai` (chỉ xe ra khỏi mỏ) hoặc `phai_sang_trai` (chỉ xe vào mỏ) nếu cần lọc | `ca_hai` |
 | `huong_min_dx` | Xe phải dịch ngang ít nhất bao nhiêu điểm ảnh mới kết luận hướng | `25` |
-| `giu_khi_khong_ro_huong` | Giữ lại lượt **không xác định được hướng** (không ghép được clip, hoặc xe dịch chuyển quá ít) | `false` |
-
-Lọc hướng **chỉ hoạt động khi có bước chụp ảnh nét** — chạy với `--khong-anh-net`
-thì không biết hướng nên giữ tất cả.
+| `giu_khi_khong_ro_huong` | Giữ lại lượt **không xác định được hướng** (xe dịch chuyển quá ít) | `true` |
 
 Cách ghép clip: app **quét hết danh sách clip của ngày trước** (ghi lại giờ của từng
 clip), rồi mới chọn clip gần nhất cho mỗi sự kiện và mở đúng những clip đó. Nhờ vậy

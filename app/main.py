@@ -65,7 +65,7 @@ def _doc_su_kien_camera(ngay_str, open_report, anh_net=True):
     kq = chay.quet_su_kien(ngay_str, anh_net=anh_net, log=print)
     if not kq["so_luot"]:
         return 1
-    print(u"Tổng cộng %d lượt xe ra khỏi mỏ." % kq["so_luot"])
+    print(u"Tổng cộng %d lượt xe." % kq["so_luot"])
     if open_report and kq["bao_cao"]:
         try:
             os.startfile(kq["bao_cao"])
@@ -81,7 +81,7 @@ def _duyet_clip(ngay_str, open_report):
     kq = chay.duyet_clip(ngay_str, log=print)
     if not kq["so_luot"]:
         return 1
-    print(u"Tổng cộng %d lượt xe ra khỏi mỏ." % kq["so_luot"])
+    print(u"Tổng cộng %d lượt xe." % kq["so_luot"])
     if open_report and kq["bao_cao"]:
         try:
             os.startfile(kq["bao_cao"])

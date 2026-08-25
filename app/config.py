@@ -53,12 +53,13 @@ DEFAULTS = {
     },
     "watch_classes": ["car", "truck", "bus"],   # loai xe can bat su kien
 
-    # --- Loc theo HUONG DI CHUYEN cua xe ---
-    # "trai_sang_phai" = chi lay xe di tu trai qua phai (xe ra khoi mo)
-    # "phai_sang_trai" = nguoc lai ; "ca_hai" = lay tat ca
-    "huong_xe": "trai_sang_phai",
+    # --- Huong di chuyen cua xe ---
+    # Mac dinh LAY TAT CA xe, khong phan biet huong ("ca_hai"). Van doc huong de
+    # ghi chu trong bao cao. Neu sau nay muon loc lai: "trai_sang_phai" (ra khoi
+    # mo) hoac "phai_sang_trai" (vao mo).
+    "huong_xe": "ca_hai",
     "huong_min_dx": 25,               # so diem anh toi thieu theo truc ngang de ket luan
-    "giu_khi_khong_ro_huong": False,  # khong xac dinh duoc huong thi BO (tranh dem nham)
+    "giu_khi_khong_ro_huong": True,   # khong ro huong van GIU (khong bo sot luot nao)
 
     # --- Bam vet & luu su kien ---
     "track_min_hits": 2,              # so lan thay lien tiep truoc khi xac nhan

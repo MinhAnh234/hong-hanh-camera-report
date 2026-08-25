@@ -8,7 +8,8 @@ di chuyen bang nut '>' va doc gio tu TIEU DE cua so phat - la chu giao dien ro
 net nen doc gan nhu khong bao gio sai.
 
 Voi moi clip: chup vai khung hinh, nhan dang xe, bam vet de biet xe di trai sang
-phai (ra khoi mo) hay nguoc lai. Chi giu lai clip co xe ra khoi mo.
+phai (ra khoi mo) hay nguoc lai - chi de GHI CHU, khong dung de loc bo.
+Moi clip co xe deu duoc ghi nhan, khong phan biet huong.
 """
 import ctypes
 import re
@@ -177,6 +178,6 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
 
     _close_player()
     ui.tra_lai()
-    log(u"• Đã duyệt %d clip, ghi nhận %d lượt xe ra khỏi mỏ."
+    log(u"• Đã duyệt %d clip, ghi nhận %d lượt xe."
         % (da_xem, len(ket_qua)))
     return ket_qua

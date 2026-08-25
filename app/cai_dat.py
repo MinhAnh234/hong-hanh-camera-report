@@ -163,7 +163,9 @@ def kiem_tra_cau_hinh():
     from . import config
     cfg = config.load()
     _in(OK, u"Camera trong cấu hình: %s" % cfg.get("camera_name", "?"))
-    _in(OK, u"Chỉ lấy xe đi: %s" % cfg.get("huong_xe", "ca_hai"))
+    _in(OK, u"Hướng xe ghi nhận: %s" % (u"tất cả các hướng"
+        if cfg.get("huong_xe", "ca_hai") == "ca_hai"
+        else cfg.get("huong_xe")))
     print(u"      Nếu tên camera khác, sửa 'camera_name' trong config.json cho khớp")
     print(u"      với tên hiển thị trong app Imou.")
     return True

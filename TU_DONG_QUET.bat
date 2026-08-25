@@ -6,8 +6,8 @@ set LOG=nhatky_tudong.txt
 echo. >> %LOG%
 echo ================ %date% %time% ================ >> %LOG%
 
-echo [1/4] Quet su kien phuong tien hom nay... >> %LOG%
-python -m app.main --su-kien --ngay hom-nay --khong-mo >> %LOG% 2>&1
+echo [1/4] Duyet clip ghi hinh hom nay (anh net)... >> %LOG%
+python -m app.main --duyet-clip --ngay hom-nay --khong-mo >> %LOG% 2>&1
 
 echo [2/4] Sinh lai bao cao gop... >> %LOG%
 python -m app.main --trang-chu >> %LOG% 2>&1

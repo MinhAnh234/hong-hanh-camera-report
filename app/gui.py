@@ -43,7 +43,7 @@ class App(object):
     def _dung_giao_dien(self):
         dau = ttk.Frame(self.root, padding=(14, 12, 14, 6))
         dau.pack(fill="x")
-        ttk.Label(dau, text=u"Giám sát xe ra khỏi mỏ",
+        ttk.Label(dau, text=u"Giám sát xe ra vào mỏ",
                   font=("Segoe UI", 15, "bold")).pack(side="left")
         self.lbl_cam = ttk.Label(dau, foreground="#5b6577",
                                  text=u"Camera: %s" % self.cfg.get("camera_name", ""))

@@ -103,7 +103,7 @@ Ba khoá cần để ý nhất khi sang máy mới:
 {
   "camera_name": "AOV PT-BE57",
   "duong_dan_imou": "C:\\Program Files\\Imou_en\\bin\\Imou_en.exe",
-  "huong_xe": "trai_sang_phai"
+  "huong_xe": "ca_hai"
 }
 ```
 
@@ -111,7 +111,7 @@ Ba khoá cần để ý nhất khi sang máy mới:
 |---|---|
 | `camera_name` | Phải **khớp tên hiển thị trong app Imou** — app dùng tên này để chọn đúng camera |
 | `duong_dan_imou` | Đường dẫn file chạy của Imou (`CAI_DAT.cmd` tự điền nếu tìm thấy) |
-| `huong_xe` | `trai_sang_phai` = chỉ lấy xe ra khỏi mỏ. Đổi thành `phai_sang_trai` hoặc `ca_hai` nếu hướng camera khác |
+| `huong_xe` | `ca_hai` = ghi nhận mọi lượt xe, không phân biệt hướng (mặc định). Đổi thành `trai_sang_phai` / `phai_sang_trai` nếu muốn chỉ đếm xe ra hoặc xe vào mỏ |
 
 Toàn bộ các khoá còn lại xem bảng trong [README.md](README.md).
 

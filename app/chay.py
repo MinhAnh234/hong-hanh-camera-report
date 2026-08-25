@@ -61,7 +61,7 @@ def duyet_clip(ngay_str="", log=print):
 
     events = dc.duyet(cfg, ngay, log=log)
     if not events:
-        log(u"Không ghi nhận lượt xe nào ra khỏi mỏ.")
+        log(u"Không ghi nhận lượt xe nào.")
         return {"ngay": ngay, "so_luot": 0, "so_bo": 0, "bao_cao": None}
 
     events.sort(key=lambda e: e["thoi_gian"])
