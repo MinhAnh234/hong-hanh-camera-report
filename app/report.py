@@ -310,9 +310,8 @@ def _bang(events, prefix=""):
         return u'<div class="tablewrap"><div class="empty">Chưa ghi nhận lượt xe nào.</div></div>'
     rows = []
     for i, e in enumerate(events, 1):
-        loai = e.get("loai_xe", "")
-        cls = loai if loai in ("truck", "car", "bus", "vehicle") else ""
-        ten = e.get("loai_xe_vi") or VI.get(loai, loai)
+        # Khong phan biet loai xe nua - moi luot deu la "Phuong tien".
+        loai, cls, ten = u"vehicle", u"vehicle", VI[u"vehicle"]
 
         gio = _esc(e.get("thoi_gian", ""))
         if e.get("thoi_gian_chac_chan") is False:
@@ -339,16 +338,11 @@ def _bang(events, prefix=""):
 
 
 def _chon_loai(events):
-    """Danh sach lua chon cho o loc 'Loai xe' (chi cac loai thuc su co)."""
-    ten = {}
-    for e in events:
-        loai = e.get("loai_xe", "")
-        if loai:
-            ten.setdefault(loai, e.get("loai_xe_vi") or VI.get(loai, loai))
-    out = [u'<option value="">Tất cả</option>']
-    for loai in sorted(ten, key=lambda k: ten[k]):
-        out.append(u'<option value="%s">%s</option>' % (_esc(loai), _esc(ten[loai])))
-    return u"".join(out)
+    """O loc 'Loai xe' - gio chi con mot loai duy nhat la 'Phuong tien'."""
+    if not events:
+        return u'<option value="">Tất cả</option>'
+    return (u'<option value="">Tất cả</option>'
+            u'<option value="vehicle">%s</option>' % _esc(VI[u"vehicle"]))
 
 
 def build(session_id, out_path=None):

@@ -80,12 +80,14 @@ def _luu(cfg, ngay, events, log):
         sess.meta["bat_dau"] = events[0]["thoi_gian"]
         sess.meta["ket_thuc"] = events[-1]["thoi_gian"]
     for e in sorted(events, key=lambda x: x["thoi_gian"]):
-        nhan = e.get("loai_xe_net")
+        # Bao cao chi can biet CO PHUONG TIEN di qua, khong phan biet xe ben /
+        # xe tai / xe con: mo hinh phan loai o khoang cach nay khong du tin cay
+        # va bao cao cung khong dung den nhan do.
         ev = sess.add_camera_event(
             e["thoi_gian"],
             e.get("anh_net") if e.get("anh_net") is not None else e.get("anh"),
-            loai_xe=nhan or "vehicle",
-            loai_xe_vi=cfg["classes_vi"].get(nhan, u"Phương tiện"),
+            loai_xe="vehicle",
+            loai_xe_vi=u"Phương tiện",
             chac_chan=e.get("chac_chan", True),
             khung=e.get("khung_xe"), do_tin_cay=e.get("tin_cay"),
             huong=e.get("huong"), dx=e.get("dx"))
