@@ -35,6 +35,14 @@ NUT_TRUOC = (0.012, 0.50)          # '<' chuyen sang clip moi hon
 VUNG_TIEU_DE = (0.030, 0.075, 0.0, 0.22)     # (y1, y2, x1, x2) theo ty le
 
 
+class ChuaCoClip(RuntimeError):
+    """Ngay dang chon chua co clip ghi hinh nao.
+
+    Chuyen binh thuong khi lich chay tu dong quet vao dau ngay moi (camera
+    chua kip ghi clip) - khong phai loi, nen chi bao mot dong thay vi do ca
+    traceback ra nhat ky."""
+
+
 def doc_gio_clip(hwnd):
     """Doc gio bat dau cua clip tu tieu de cua so phat -> 'HH:MM:SS'."""
     p = print_window(hwnd)
@@ -109,7 +117,8 @@ def mo_clip_moi_nhat(ui, cfg, ngay, log=print):
             if h:
                 return h
         time.sleep(2.0)
-    raise RuntimeError(u"Không mở được clip nào trong ngày %s." % ngay)
+    raise ChuaCoClip(u"Ngày %s chưa có clip ghi hình nào."
+                     % ngay.strftime("%d-%m-%Y"))
 
 
 def _giay(hms):
@@ -266,7 +275,12 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
         raise RuntimeError(ui.cap.last_error or u"Không tìm thấy cửa sổ Imou.")
     _close_player()
 
-    hwnd = mo_clip_moi_nhat(ui, cfg, ngay, log)
+    try:
+        hwnd = mo_clip_moi_nhat(ui, cfg, ngay, log)
+    except ChuaCoClip as e:
+        log(u"  %s" % e)
+        ui.tra_lai()
+        return []
     ImouUI.dua_len_tren(hwnd, True)
 
     mong_muon = cfg.get("huong_xe", "ca_hai")
