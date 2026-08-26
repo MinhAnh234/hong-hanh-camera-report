@@ -371,6 +371,7 @@ def build(session_id, out_path=None):
         "__PHUDE__": phude,
         "__BANG__": _bang(events, prefix),
         "__CHON_LOAI__": _chon_loai(events),
+        "__CHON_NGAY__": _chon_ngay(events),
         "__CHANTRANG__": _esc(
             u"Phiên %s · xuất lúc %s"
             % (meta.get("ma_phien", session_id),
@@ -385,13 +386,18 @@ def build(session_id, out_path=None):
 
 # ---------------------------------------------------------------- gop nhieu ngay
 def _chon_ngay(events):
-    """Danh sach lua chon cho o loc 'Ngay'."""
+    """Danh sach lua chon cho o loc 'Ngay'.
+
+    Mac dinh chon NGAY MOI NHAT: mo bao cao len la thay ngay hom nay ngay,
+    khong phai cuon qua ca nhung ngay cu. Bam "Xoa loc" de xem lai tat ca.
+    """
     ngays = sorted({e.get("thoi_gian", "")[:10] for e in events if e.get("thoi_gian")},
                    reverse=True)
     out = [u'<option value="">Tất cả</option>']
-    for n in ngays:
-        out.append(u'<option value="%s">%s</option>'
-                   % (_esc(n), _esc(u"-".join(reversed(n.split("-"))))))
+    for i, n in enumerate(ngays):
+        out.append(u'<option value="%s"%s>%s</option>'
+                   % (_esc(n), u" selected" if i == 0 else u"",
+                      _esc(u"-".join(reversed(n.split("-"))))))
     return u"".join(out)
 
 
