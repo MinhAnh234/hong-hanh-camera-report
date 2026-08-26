@@ -59,13 +59,27 @@ def duyet_clip(ngay_str="", log=print):
     log(u"Camera: %s | duyệt clip ngày %s"
         % (cfg.get("camera_name", ""), ngay.strftime("%d-%m-%Y")))
 
-    events = dc.duyet(cfg, ngay, log=log)
+    try:
+        events = dc.duyet(cfg, ngay, log=log)
+    except RuntimeError as e:
+        # App Imou dang chay qua nua dem thi dai lich cua no khong co ngay hom
+        # nay va nut mui ten sang phai bi khoa. Khoi dong lai app la het.
+        if u"chọn được ngày" not in str(e):
+            raise
+        log(u"  (!) %s" % e)
+        from .capture import khoi_dong_lai_imou
+        if not khoi_dong_lai_imou(cfg, log):
+            raise
+        events = dc.duyet(cfg, ngay, log=log)
+
     if not events:
         log(u"Không ghi nhận lượt xe nào.")
         return {"ngay": ngay, "so_luot": 0, "so_bo": 0, "bao_cao": None}
 
     events.sort(key=lambda e: e["thoi_gian"])
     events = dc.gop_luot_trung(events, int(cfg.get("gop_luot_cach_nhau_giay", 45)), log)
+    events = dc.gop_xe_dung_yen(events, float(cfg.get("gop_xe_dung_yen_phut", 10)),
+                                float(cfg.get("gop_xe_dung_yen_lech_px", 60)), log)
     _luu(cfg, ngay, events, log)
     web, _ = report.sinh_bao_cao(log=log)
     return {"ngay": ngay, "so_luot": len(events), "so_bo": 0, "bao_cao": web}

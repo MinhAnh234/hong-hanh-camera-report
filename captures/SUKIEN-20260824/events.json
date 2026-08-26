@@ -294,32 +294,6 @@
       "ghi_chu": ""
     },
     {
-      "ma_luot": "SUKIEN-20260824-012",
-      "stt": 12,
-      "thoi_gian": "2026-08-24 15:05:08",
-      "gio": 15,
-      "loai_xe": "vehicle",
-      "loai_xe_vi": "Phương tiện",
-      "do_tin_cay": 0.942,
-      "khung": [
-        1072,
-        352,
-        190,
-        85
-      ],
-      "quang_duong_px": null,
-      "so_khung_hinh": null,
-      "kich_thuoc_anh": [
-        1545,
-        848
-      ],
-      "anh": "012_truck_20260824-150508.jpg",
-      "anh_danh_dau": "012_truck_20260824-150508_danhdau.jpg",
-      "nguon_su_kien": "Camera tự phát hiện",
-      "thoi_gian_chac_chan": true,
-      "ghi_chu": ""
-    },
-    {
       "ma_luot": "SUKIEN-20260824-013",
       "stt": 13,
       "thoi_gian": "2026-08-24 15:10:54",

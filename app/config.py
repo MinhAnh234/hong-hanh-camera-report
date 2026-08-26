@@ -84,6 +84,19 @@ DEFAULTS = {
     # giu luot co do tin cay cao nhat. 0 = tat.
     "gop_luot_cach_nhau_giay": 45,
 
+    # --- Khung gio theo doi ---
+    # Tu gio nay tro di (theo GIO CUA CAMERA) thi khong xet nua: troi da toi,
+    # anh hong ngoai chi cho nhan dang nham. Bo qua luon ca buoc phat clip nen
+    # moi lan quet nhanh hon han. 0 = quet ca ngay.
+    "khong_quet_tu_gio": 18,
+
+    # --- Gop xe DUNG YEN mot cho ---
+    # Xe do lai trong khung hinh se hien ra o hang loat clip lien tiep, moi lan
+    # mot "luot" - nhung khung bao quanh no gan nhu khong nhuc nhich. Gop cac
+    # luot sat nhau ma khung nam gan nhu cung cho lai lam mot. 0 = tat.
+    "gop_xe_dung_yen_phut": 10,
+    "gop_xe_dung_yen_lech_px": 60,
+
     # --- Bam vet & luu su kien ---
     "track_min_hits": 2,              # so lan thay lien tiep truoc khi xac nhan
     "track_min_move_px": 5,          # quang duong toi thieu de coi la "dang chuyen dong"

@@ -231,8 +231,32 @@ class ImouUI(object):
             ys = sorted(t[2] for t in out)
             giua = ys[len(ys) // 2]
             out = [t for t in out if abs(t[2] - giua) <= 10]
+            out = self._day_lien_tiep(out)
         out.sort()
         return out
+
+    @staticmethod
+    def _day_lien_tiep(tabs):
+        """Chi giu day ngay LIEN TIEP dai nhat (xep theo vi tri ngang).
+
+        Chu hai ben dai lich ("Mốc Thời Gian...", nhan ngay) co the bi doc
+        thanh mot con so va lot vao danh sach - vi du "26" o dai lich khong co
+        nhung chu ben phai lai ra so 6. Mot con so lac nam xa ben phai se keo
+        lech vi tri nut mui ten, khien lich khong lat sang tuan sau duoc.
+        """
+        theo_x = sorted(tabs, key=lambda t: t[1])
+        tot, cur = [], []
+        for t in theo_x:
+            noi_tiep = cur and (t[0] == cur[-1][0] + 1
+                                or (cur[-1][0] >= 28 and t[0] == 1))   # sang thang moi
+            if cur and not noi_tiep:
+                if len(cur) > len(tot):
+                    tot = cur
+                cur = []
+            cur.append(t)
+        if len(cur) > len(tot):
+            tot = cur
+        return tot if len(tot) >= 3 else tabs
 
     def ngay_dang_chon(self, img=None):
         for d, _x, _y, chon in self.day_tabs(img):
@@ -276,9 +300,17 @@ class ImouUI(object):
             lui = day < nho_nhat or day > max(t[0] for t in tabs)
             if not lui:
                 continue
-            x_mui_ten = min(t[1] for t in tabs) - 58        # nut '<' truoc the dau
+            # Hai nut mui ten nam cach the ngay dau/cuoi dung mot buoc the.
+            xs = sorted(t[1] for t in tabs)
+            buoc = ((xs[-1] - xs[0]) / float(len(xs) - 1)) if len(xs) > 1 else 86.0
+            buoc = min(max(buoc, 60.0), 120.0)              # chan gia tri vo ly
             if day > max(t[0] for t in tabs):
-                x_mui_ten = max(t[1] for t in tabs) + 58     # nut '>' sau the cuoi
+                x_mui_ten = int(xs[-1] + buoc)               # nut '>' sau the cuoi
+            else:
+                # OCR hay doc sot vai the dau dai -> suy nguoc tu the CUOI:
+                # dai lich luon co dung 7 ngay.
+                x_dau = min(xs[0], xs[-1] - 6 * buoc)
+                x_mui_ten = int(x_dau - buoc)                # nut '<' truoc the dau
             self.click(x_mui_ten, tabs[0][2], settle=2.2)
         return False
 

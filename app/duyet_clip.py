@@ -199,6 +199,54 @@ def gop_luot_trung(events, khoang, log=print):
     return giu
 
 
+def gop_xe_dung_yen(events, phut, lech, log=print, khoa_khung="khung_xe"):
+    """Gop cac luot lien tiep ma KHUNG XE nam gan nhu cung mot cho.
+
+    Mot chiec xe do lai giua khung hinh se hien ra o hang chuc clip lien tiep,
+    moi clip thanh mot "luot", du no chi la MOT lan xe vao mo. Khac voi xe dang
+    chay - tam khung dich hang tram diem anh giua hai clip - xe dung yen co tam
+    khung gan nhu khong doi.
+
+    `events` phai da sap xep theo thoi gian tang dan.
+    """
+    if phut <= 0 or lech <= 0 or len(events) < 2:
+        return events
+
+    def giay(e):
+        h, p, s = (int(v) for v in e["thoi_gian"][11:].split(":"))
+        return h * 3600 + p * 60 + s
+
+    def tam(e):
+        k = e.get(khoa_khung) or e.get("khung")
+        if not k:
+            return None
+        x, y, w, h = k
+        return x + w // 2, y + h // 2
+
+    giu, bo, i = [], [], 0
+    while i < len(events):
+        nhom, j = [events[i]], i + 1
+        while j < len(events):
+            if giay(events[j]) - giay(nhom[-1]) > phut * 60:
+                break
+            a, b = tam(nhom[-1]), tam(events[j])
+            if a is None or b is None:
+                break
+            if abs(a[0] - b[0]) > lech or abs(a[1] - b[1]) > lech:
+                break
+            nhom.append(events[j])
+            j += 1
+        tot = max(nhom, key=lambda e: e.get("tin_cay") or e.get("do_tin_cay") or 0)
+        giu.append(tot)
+        bo.extend(e for e in nhom if e is not tot)
+        i = j
+    if bo:
+        log(u"• Gộp %d lượt xe đỗ tại chỗ (khung không nhúch nhích)." % len(bo))
+        for e in bo:
+            log(u"    ↳ bỏ %s" % e["thoi_gian"][11:])
+    return giu
+
+
 def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
     """Duyet cac clip cua `ngay` tu moi den cu.
 
@@ -222,6 +270,7 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
     ImouUI.dua_len_tren(hwnd, True)
 
     mong_muon = cfg.get("huong_xe", "ca_hai")
+    bo_tu_gio = int(cfg.get("khong_quet_tu_gio", 0) or 0)
     ket_qua, da_xem = [], 0
     gio = doc_gio_clip(hwnd)
     log(u"• Bắt đầu từ clip %s, duyệt bằng nút ›…" % gio)
@@ -232,6 +281,27 @@ def duyet(cfg, ngay, log=print, dung_truoc=None, toi_da=250):
         if dung_truoc and _giay(gio) < _giay(dung_truoc):
             log(u"  đã tới mốc %s – dừng." % dung_truoc)
             break
+
+        if bo_tu_gio and int(gio[:2]) >= bo_tu_gio:
+            # Ngoai gio theo doi: bo qua LUON, khong can phat clip -> nhanh hon
+            # rat nhieu vi buoi toi van co hang chuc clip.
+            log(u"  %s  – ngoài giờ theo dõi (từ %02d:00) – bỏ qua"
+                % (gio, bo_tu_gio))
+            moi = sang_clip_ke_tiep(hwnd, gio)
+            if moi is None:
+                _close_player()
+                h = mo_clip_cu_hon(ui, gio, log)
+                if h is None:
+                    log(u"  hết clip.")
+                    break
+                hwnd = h
+                ImouUI.dua_len_tren(hwnd, True)
+                moi = doc_gio_clip(hwnd)
+                if moi is None or _giay(moi) >= _giay(gio):
+                    log(u"  hết clip.")
+                    break
+            gio = moi
+            continue
 
         anh, det, huong, dx = chup_tu_player(hwnd, detector, cfg,
                                              so_khung=14, moi_khung=0.8,

@@ -200,7 +200,38 @@ def mo_app_imou(cfg, log=None):
         noi(u"Không mở được app Imou: %s" % e)
         return False
 
+    if cho_imou_san_sang(cfg, noi):
+        return True
+
+    # Co luc Popen tha ra roi app chet ngay (hay gap sau khi bi tat cung).
+    # os.startfile di qua Windows Shell nen len duoc trong nhung truong hop do.
+    noi(u"Thử mở lại bằng cách khác…")
+    try:
+        os.startfile(exe)
+    except Exception as e:
+        noi(u"Không mở được app Imou: %s" % e)
+        return False
     return cho_imou_san_sang(cfg, noi)
+
+
+def khoi_dong_lai_imou(cfg, log=None):
+    """Tat han app Imou roi mo lai. Tra ve True neu app da san sang.
+
+    Can lam khi app dang chay QUA NUA DEM: dai lich cua no chi co cac ngay tinh
+    den luc khoi dong, sang ngay moi van khong hien ngay hom nay va nut mui ten
+    sang phai bi khoa - khong the chon duoc ngay can quet.
+    """
+    noi = log or (lambda *_a: None)
+    exe = cfg.get("duong_dan_imou", "")
+    ten = os.path.basename(exe) or "Imou_en.exe"
+    noi(u"Khởi động lại app Imou…")
+    try:
+        subprocess.run(["taskkill", "/IM", ten, "/F"], capture_output=True)
+    except Exception as e:
+        noi(u"Không tắt được app Imou: %s" % e)
+        return False
+    time.sleep(4.0)
+    return mo_app_imou(cfg, noi)
 
 
 def giao_dien_da_len(img):
