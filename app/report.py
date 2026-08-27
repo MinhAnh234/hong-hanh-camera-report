@@ -309,7 +309,14 @@ def _bang(events, prefix=""):
     if not events:
         return u'<div class="tablewrap"><div class="empty">Chưa ghi nhận lượt xe nào.</div></div>'
     rows = []
-    for i, e in enumerate(events, 1):
+    # Moi NGAY danh so lai tu 1: bao cao gop nhieu ngay, ma nguoi xem
+    # thuong loc theo tung ngay nen so thu tu chay tiep tu ngay truoc
+    # (ngay 25 bat dau tu 17...) doc rat kho hieu.
+    dem_ngay = {}
+    for e in events:
+        ngay_e = e.get("thoi_gian", "")[:10]
+        dem_ngay[ngay_e] = dem_ngay.get(ngay_e, 0) + 1
+        i = dem_ngay[ngay_e]
         # Khong phan biet loai xe nua - moi luot deu la "Phuong tien".
         loai, cls, ten = u"vehicle", u"vehicle", VI[u"vehicle"]
 
