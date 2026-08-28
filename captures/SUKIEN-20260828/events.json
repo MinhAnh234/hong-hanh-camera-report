@@ -1,0 +1,571 @@
+{
+  "phien": {
+    "ma_phien": "SUKIEN-20260828",
+    "camera": "AOV PT-BE57",
+    "bat_dau": "2026-08-28 07:56:42",
+    "ket_thuc": "2026-08-28 15:00:10",
+    "nguon": "Sự kiện phát hiện phương tiện của camera Imou"
+  },
+  "su_kien": [
+    {
+      "ma_luot": "SUKIEN-20260828-001",
+      "stt": 1,
+      "thoi_gian": "2026-08-28 07:56:42",
+      "gio": 7,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.951,
+      "khung": [
+        890,
+        341,
+        184,
+        82
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -405.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "001_vehicle_20260828-075642.jpg",
+      "anh_danh_dau": "001_vehicle_20260828-075642_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-002",
+      "stt": 2,
+      "thoi_gian": "2026-08-28 07:56:58",
+      "gio": 7,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.538,
+      "khung": [
+        652,
+        268,
+        88,
+        35
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 26.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "002_vehicle_20260828-075658.jpg",
+      "anh_danh_dau": "002_vehicle_20260828-075658_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-003",
+      "stt": 3,
+      "thoi_gian": "2026-08-28 08:23:42",
+      "gio": 8,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.926,
+      "khung": [
+        716,
+        308,
+        54,
+        53
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 325.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "003_vehicle_20260828-082342.jpg",
+      "anh_danh_dau": "003_vehicle_20260828-082342_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-004",
+      "stt": 4,
+      "thoi_gian": "2026-08-28 09:01:41",
+      "gio": 9,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.955,
+      "khung": [
+        664,
+        269,
+        68,
+        58
+      ],
+      "huong": null,
+      "dx": -12.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "004_vehicle_20260828-090141.jpg",
+      "anh_danh_dau": "004_vehicle_20260828-090141_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-005",
+      "stt": 5,
+      "thoi_gian": "2026-08-28 09:25:54",
+      "gio": 9,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.973,
+      "khung": [
+        1161,
+        359,
+        214,
+        82
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 649.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "005_vehicle_20260828-092554.jpg",
+      "anh_danh_dau": "005_vehicle_20260828-092554_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-006",
+      "stt": 6,
+      "thoi_gian": "2026-08-28 09:52:26",
+      "gio": 9,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.98,
+      "khung": [
+        886,
+        338,
+        171,
+        83
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -367.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "006_vehicle_20260828-095226.jpg",
+      "anh_danh_dau": "006_vehicle_20260828-095226_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-007",
+      "stt": 7,
+      "thoi_gian": "2026-08-28 10:01:42",
+      "gio": 10,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.973,
+      "khung": [
+        1068,
+        355,
+        277,
+        81
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 654.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "007_vehicle_20260828-100142.jpg",
+      "anh_danh_dau": "007_vehicle_20260828-100142_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-008",
+      "stt": 8,
+      "thoi_gian": "2026-08-28 10:23:41",
+      "gio": 10,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.954,
+      "khung": [
+        854,
+        331,
+        160,
+        89
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -291.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "008_vehicle_20260828-102341.jpg",
+      "anh_danh_dau": "008_vehicle_20260828-102341_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-009",
+      "stt": 9,
+      "thoi_gian": "2026-08-28 10:36:30",
+      "gio": 10,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.904,
+      "khung": [
+        888,
+        339,
+        156,
+        77
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 204.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "009_vehicle_20260828-103630.jpg",
+      "anh_danh_dau": "009_vehicle_20260828-103630_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-010",
+      "stt": 10,
+      "thoi_gian": "2026-08-28 10:57:49",
+      "gio": 10,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.891,
+      "khung": [
+        829,
+        331,
+        165,
+        82
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -319.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "010_vehicle_20260828-105749.jpg",
+      "anh_danh_dau": "010_vehicle_20260828-105749_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-011",
+      "stt": 11,
+      "thoi_gian": "2026-08-28 11:04:43",
+      "gio": 11,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.987,
+      "khung": [
+        917,
+        341,
+        175,
+        86
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 504.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "011_vehicle_20260828-110443.jpg",
+      "anh_danh_dau": "011_vehicle_20260828-110443_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-012",
+      "stt": 12,
+      "thoi_gian": "2026-08-28 12:48:31",
+      "gio": 12,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.962,
+      "khung": [
+        852,
+        331,
+        162,
+        88
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -463.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "012_vehicle_20260828-124831.jpg",
+      "anh_danh_dau": "012_vehicle_20260828-124831_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-013",
+      "stt": 13,
+      "thoi_gian": "2026-08-28 12:57:15",
+      "gio": 12,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.952,
+      "khung": [
+        1190,
+        365,
+        204,
+        77
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 649.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "013_vehicle_20260828-125715.jpg",
+      "anh_danh_dau": "013_vehicle_20260828-125715_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-014",
+      "stt": 14,
+      "thoi_gian": "2026-08-28 13:21:13",
+      "gio": 13,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.899,
+      "khung": [
+        995,
+        364,
+        184,
+        72
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -378.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "014_vehicle_20260828-132113.jpg",
+      "anh_danh_dau": "014_vehicle_20260828-132113_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-015",
+      "stt": 15,
+      "thoi_gian": "2026-08-28 13:27:29",
+      "gio": 13,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.979,
+      "khung": [
+        917,
+        342,
+        179,
+        83
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 683.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "015_vehicle_20260828-132729.jpg",
+      "anh_danh_dau": "015_vehicle_20260828-132729_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-016",
+      "stt": 16,
+      "thoi_gian": "2026-08-28 13:56:22",
+      "gio": 13,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.951,
+      "khung": [
+        893,
+        334,
+        162,
+        90
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -220.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "016_vehicle_20260828-135622.jpg",
+      "anh_danh_dau": "016_vehicle_20260828-135622_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-017",
+      "stt": 17,
+      "thoi_gian": "2026-08-28 14:02:06",
+      "gio": 14,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.975,
+      "khung": [
+        1229,
+        363,
+        195,
+        79
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 637.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "017_vehicle_20260828-140206.jpg",
+      "anh_danh_dau": "017_vehicle_20260828-140206_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-018",
+      "stt": 18,
+      "thoi_gian": "2026-08-28 14:24:32",
+      "gio": 14,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.977,
+      "khung": [
+        1162,
+        353,
+        213,
+        84
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -414.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "018_vehicle_20260828-142432.jpg",
+      "anh_danh_dau": "018_vehicle_20260828-142432_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-019",
+      "stt": 19,
+      "thoi_gian": "2026-08-28 14:39:08",
+      "gio": 14,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.986,
+      "khung": [
+        1137,
+        351,
+        217,
+        86
+      ],
+      "huong": "trai_sang_phai",
+      "dx": 588.5,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "019_vehicle_20260828-143908.jpg",
+      "anh_danh_dau": "019_vehicle_20260828-143908_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    },
+    {
+      "ma_luot": "SUKIEN-20260828-020",
+      "stt": 20,
+      "thoi_gian": "2026-08-28 15:00:10",
+      "gio": 15,
+      "loai_xe": "vehicle",
+      "loai_xe_vi": "Phương tiện",
+      "do_tin_cay": 0.941,
+      "khung": [
+        875,
+        337,
+        175,
+        87
+      ],
+      "huong": "phai_sang_trai",
+      "dx": -504.0,
+      "quang_duong_px": null,
+      "so_khung_hinh": null,
+      "kich_thuoc_anh": [
+        1545,
+        848
+      ],
+      "anh": "020_vehicle_20260828-150010.jpg",
+      "anh_danh_dau": "020_vehicle_20260828-150010_danhdau.jpg",
+      "nguon_su_kien": "Camera tự phát hiện",
+      "thoi_gian_chac_chan": true,
+      "ghi_chu": ""
+    }
+  ]
+}
